@@ -1,0 +1,30 @@
+Here is the first file in the Repo; A group of notes from the first meeting
+
+Topics: Language to use, Divvy up some work, Set up next meeting time
+
+Notes: Sounds like flash could work well, has a GUI, object oriented, no terminal base.
+
+Classes that we need:
+
+Main
+Exec → User Input
+Board → create board from user input
+Buttons → states: un-clicked box, mine, flag, clicked
+Game-play → Controls user functions
+
+Exec:
+    -Menu
+    -print
+Board:
+    -Constructor: take size and number of mines
+    -Board creator: fills the array with values (0 or 1)
+Player:
+    -Constructor: takes a board
+    -Play: user clicks?
+
+What to do by next meeting:
+
+Get Flash player trial
+Get base understanding of flash
+
+    Next meeting time:    Wednesday September 5, 2018
