@@ -8,7 +8,7 @@
         {
              
         }
-		public function isEmpty( row:int, col:int ):Boolean //returns true if there's a bomb, false if it's an empty space
+		public function isEmpty( row:int, col:int ):Boolean //returns false if there's a bomb, true if it's an empty space
 		{
 			if(m_array[row][col].isEmpty())
 			{
@@ -20,7 +20,7 @@
 				return false; //Bomb explodes
 			}
 		}
-		public function Checker( row:int, col:int ):Boolean
+		public function Checker( row:int, col:int ):Boolean //recursive function that checks around the selected spot 
 		{
 			if(row==rowSize || col==colSize)
 			{
@@ -70,6 +70,26 @@
 					{
 						counter = counter+1;
 					}
+				}
+				
+				if(counter==0)
+				{
+					//switch frame to empty
+					Checker(row, col+1);
+					Checker(row, col-1);
+					Checker(row+1, col);
+					Checker(row+1, col+1);
+					Checker(row+1, col-1);
+					Checker(row-1, col);
+					Checker(row-1, col+1);
+					Checker(row-1, col-1);
+					return true;
+				}
+				if(counter!=0)
+				{
+					//switch frame to counter
+					counter=0;
+					return true;
 				}
 				
 			}
