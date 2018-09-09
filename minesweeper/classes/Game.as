@@ -4,7 +4,7 @@
 	import classes.BoardPiece;
     public class Game 
     {
-        public function Game() //initialize private variables, set clicks, call isEmpty function
+        public function Game() //initialize private variables, set clicks, call isEmpty function for left click, setFlag for right click
         {
              
         }
