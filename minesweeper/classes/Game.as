@@ -20,6 +20,10 @@
 				return false; //Bomb explodes
 			}
 		}
+		public function setFlag( row:int,col:int ):Boolean
+		{
+			m_array[row][col].toggleFlagged();
+		}
 		public function Checker( row:int, col:int ):Boolean //recursive function that checks around the selected spot 
 		{
 			if(row==rowSize || col==colSize)
@@ -74,7 +78,7 @@
 				
 				if(counter==0)
 				{
-					//switch frame to empty
+					m_arr[row][col].gotoAndStop(9); //switch frame to empty
 					Checker(row, col+1);
 					Checker(row, col-1);
 					Checker(row+1, col);
@@ -87,7 +91,7 @@
 				}
 				if(counter!=0)
 				{
-					//switch frame to counter
+					m_arr[row][col].gotoAndStop(counter); //switch frame to counter
 					counter=0;
 					return true;
 				}
