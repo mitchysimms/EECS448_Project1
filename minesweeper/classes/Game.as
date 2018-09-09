@@ -20,7 +20,7 @@
 				return false; //Bomb explodes
 			}
 		}
-		public function setFlag( row:int,col:int ):Boolean
+		public function setFlag( row:int,col:int ):void
 		{
 			m_array[row][col].toggleFlagged();
 		}
