@@ -1,6 +1,7 @@
 ﻿package classes
 {
 	import classes.BoardPiece;
+
     public class Board
     {
 		private var rowTotal:int;
@@ -20,7 +21,7 @@
 			gameBoard = [];
 		}
 		
-		public function fillBoardArray(){
+		public function fillBoardArray():void{
 			for (i = 0; i < rowTotal; i++){
 				gameBoard[i] = new Array(colsTotal)
 				for (j = 0; j < colsTotal; j++){
@@ -58,15 +59,19 @@
 			}
 		}
 		
-		public function getRows(){
+		public function getMines():int {
+			return minesTotal;
+		}
+		
+		public function getRows():int{
 			return rowTotal;
 		}
 		
-		public function getCols(){
+		public function getCols():int{
 			return colTotal;
 		}
 		
-		public function getBoardPiece(desiredRow:int, desiredCol:int){
+		public function getBoardPiece(desiredRow:int, desiredCol:int):BoardPiece{
 			return gameBoard[desiredRow][desiredCol];
 		}
     }

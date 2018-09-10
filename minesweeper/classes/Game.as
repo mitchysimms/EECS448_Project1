@@ -10,6 +10,9 @@
         {
              board = new Board();
 	     board = boardPassed;
+			rowSize = board.getRows();
+			colSize = board.getCols();
+			flagCount = 0;
 			for (var i:int = 0; i < rowSize; i++) {
 				for (var j:int = 0; j < colSize; j++) {
 					board.getBoardPiece(i, j).addEventListener(MouseEvent.CLICK, handleClick);
@@ -25,7 +28,15 @@
 		}
 		
 		public function handleRightClick(evt:MouseEvent):void {
-			changeFlag(evt.currentTarget.getRow(), evt.currentTarget.getCol());
+			if (evt.currentTarget.currentFrame == 10) {
+				flagCount++;
+			}
+			else if (evt.currentTarget.currentFrame == 11){
+				flagCount--;
+			}
+			if (flagCount < board.getMines()) {
+				changeFlag(evt.currentTarget.getRow(), evt.currentTarget.getCol());
+			}
 		}
 		
 		public function isEmpty( row:int, col:int ):Boolean //returns false if there's a bomb, true if it's an empty space
@@ -123,6 +134,7 @@
 		private var rowSize:int;
 		private var colSize:int;
 		private var counter:int;
+		private var flagCount:int;
 		
     }
 }
