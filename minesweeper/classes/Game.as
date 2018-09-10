@@ -4,9 +4,9 @@
 	import classes.BoardPiece;
     public class Game 
     {
-        public function Game() //initialize private variables, set clicks, call isEmpty function for left click, setFlag for right click
+        public function Game( boardPassed:Board ) //initialize private variables, set clicks, call isEmpty function for left click, setFlag for right click
         {
-             
+             board = boardPassed;
         }
 		public function isEmpty( row:int, col:int ):Boolean //returns false if there's a bomb, true if it's an empty space
 		{
@@ -20,7 +20,7 @@
 				return false; //Bomb explodes
 			}
 		}
-		public function setFlag( row:int,col:int ):void
+		public function changeFlag( row:int,col:int ):void
 		{
 			board.getBoardPiece(row, col).toggleFlagged();
 		}
