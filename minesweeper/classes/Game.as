@@ -1,5 +1,7 @@
 ﻿package classes
 {
+	import flash.events.MouseEvent
+	import flash.events.Event
 	import classes.Board;
 	import classes.BoardPiece;
     public class Game 
@@ -8,7 +10,24 @@
         {
              board = new Board();
 	     board = boardPassed;
+			for (var i:int = 0; i < rowSize; i++) {
+				for (var j:int = 0; j < colSize; j++) {
+					board.getBoardPiece(i, j).addEventListener(MouseEvent.CLICK, handleClick);
+					board.getBoardPiece(i, j).addEventListener(MouseEvent.RIGHT_CLICK, handleRightClick);
+				}
+			}
         }
+		
+		public function handleClick(evt:MouseEvent):void {
+			if (evt.currentTarget.currentFrame == 10) {
+				isEmpty(evt.currentTarget.getRow(), evt.currentTarget.getCol());
+			}
+		}
+		
+		public function handleRightClick(evt:MouseEvent):void {
+			changeFlag(evt.currentTarget.getRow(), evt.currentTarget.getCol());
+		}
+		
 		public function isEmpty( row:int, col:int ):Boolean //returns false if there's a bomb, true if it's an empty space
 		{
 			if((board.getBoardPiece(row, col)).checkForMine()==false)

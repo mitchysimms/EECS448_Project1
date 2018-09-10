@@ -1,4 +1,4 @@
-package classes
+﻿package classes
 {
 	import classes.BoardPiece;
     public class Board
@@ -24,7 +24,7 @@ package classes
 			for (i = 0; i < rowTotal; i++){
 				gameBoard[i] = new Array(colsTotal)
 				for (j = 0; j < colsTotal; j++){
-					gameBoard[i][j] = new BoardPiece();
+					gameBoard[i][j] = new BoardPiece(i, j);
 				}
 			}
 		}
