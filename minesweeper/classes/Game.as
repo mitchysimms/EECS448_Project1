@@ -12,6 +12,7 @@
 	     board = boardPassed;
 			rowSize = board.getRows();
 			colSize = board.getCols();
+			counter = 0;
 			flagCount = 0;
 			for (var i:int = 0; i < rowSize; i++) {
 				for (var j:int = 0; j < colSize; j++) {
