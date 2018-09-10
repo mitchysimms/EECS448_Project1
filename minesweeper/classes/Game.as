@@ -6,7 +6,8 @@
     {
         public function Game( boardPassed:Board ) //initialize private variables, set clicks, call isEmpty function for left click, setFlag for right click
         {
-             board = boardPassed;
+             board = new Board();
+	     board = boardPassed;
         }
 		public function isEmpty( row:int, col:int ):Boolean //returns false if there's a bomb, true if it's an empty space
 		{
