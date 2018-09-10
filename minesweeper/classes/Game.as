@@ -10,7 +10,7 @@
         }
 		public function isEmpty( row:int, col:int ):Boolean //returns false if there's a bomb, true if it's an empty space
 		{
-			if(m_array[row][col].isEmpty())
+			if((board.getBoardPiece(row, col)).checkForMine())
 			{
 				Checker(row, col);
 				return true;
@@ -20,9 +20,9 @@
 				return false; //Bomb explodes
 			}
 		}
-		public function setFlag( row:int,col:int ):Boolean
+		public function setFlag( row:int,col:int ):void
 		{
-			m_array[row][col].toggleFlagged();
+			board.getBoardPiece(row, col).toggleFlagged();
 		}
 		public function Checker( row:int, col:int ):Boolean //recursive function that checks around the selected spot 
 		{
@@ -33,28 +33,28 @@
 			else
 			{
 				if(row-1>=0){
-					if(m_array[row-1][col].isEmpty()==false)//checks up
+					if((board.getBoardPiece(row-1, col)).checkForMine()==false)//checks up
 					{
 						counter = counter+1;
 					}
 					
 					if(col+1<colSize){
-						if(m_array[row-1][col+1].isEmpty()==false)//checks right-up
+						if((board.getBoardPiece(row-1, col+1)).checkForMine()==false)//checks right-up
 						{
 							counter = counter+1;
 						}
-						if(m_array[row][col+1].isEmpty()==false)//checks right
+						if((board.getBoardPiece(row, col+1)).checkForMine()==false)//checks right
 						{
 							counter = counter+1;
 						}
 					}
 					
 					if(col-1>=0){
-						if(m_array[row-1][col-1].isEmpty()==false)//check left-up
+						if((board.getBoardPiece(row-1, col-1)).checkForMine()==false)//check left-up
 						{
 							counter = counter+1;
 						}
-						if(m_array[row][col-1].isEmpty()==false)//checks left
+						if((board.getBoardPiece(row, col-1)).checkForMine()==false)//checks left
 						{
 							counter = counter+1;
 						}
@@ -62,15 +62,15 @@
 				}
 				
 				if(row+1<rowSize){
-					if(m_array[row+1][col].isEmpty()==false)//checks down
+					if((board.getBoardPiece(row+1, col)).checkForMine()==false)//checks down
 					{
 						counter = counter+1;
 					}
-					if(m_array[row+1][col+1].isEmpty()==false)//check right-down
+					if((board.getBoardPiece(row+1, col+1)).checkForMine()==false)//check right-down
 					{
 						counter = counter+1;
 					}
-					if(m_array[row+1][col-1].isEmpty()==false)//checks left-down
+					if((board.getBoardPiece(row+1, col-1)).checkForMine()==false)//checks left-down
 					{
 						counter = counter+1;
 					}
@@ -78,7 +78,7 @@
 				
 				if(counter==0)
 				{
-					m_arr[row][col].gotoAndStop(9); //switch frame to empty
+					(board.getBoardPiece(row, col)).gotoAndStop(9); //switch frame to empty
 					Checker(row, col+1);
 					Checker(row, col-1);
 					Checker(row+1, col);
@@ -91,14 +91,15 @@
 				}
 				if(counter!=0)
 				{
-					m_arr[row][col].gotoAndStop(counter); //switch frame to counter
+					(board.getBoardPiece(row, col)).gotoAndStop(counter); //switch frame to counter
 					counter=0;
 					return true;
 				}
 				
 			}
 		}
-		private var m_array:Array;
+		//private var m_array:Array;
+		private var board:Board;
 		private var rowSize:int;
 		private var colSize:int;
 		private var counter:int;
