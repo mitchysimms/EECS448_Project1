@@ -4,13 +4,14 @@
 	import classes.BoardPiece;
     public class Game 
     {
-        public function Game() //initialize private variables, set clicks, call isEmpty function for left click, setFlag for right click
+        public function Game( boardPassed:Board ) //initialize private variables, set clicks, call isEmpty function for left click, setFlag for right click
         {
-             
+             board = new Board();
+	     board = boardPassed;
         }
 		public function isEmpty( row:int, col:int ):Boolean //returns false if there's a bomb, true if it's an empty space
 		{
-			if((board.getBoardPiece(row, col)).checkForMine())
+			if((board.getBoardPiece(row, col)).checkForMine()==false)
 			{
 				Checker(row, col);
 				return true;
@@ -20,9 +21,9 @@
 				return false; //Bomb explodes
 			}
 		}
-		public function setFlag( row:int,col:int ):void
+		public function changeFlag( row:int,col:int ):void
 		{
-			board.getBoardPiece(row, col).toggleFlagged();
+			(board.getBoardPiece(row, col)).toggleFlagged();
 		}
 		public function Checker( row:int, col:int ):Boolean //recursive function that checks around the selected spot 
 		{
@@ -33,28 +34,28 @@
 			else
 			{
 				if(row-1>=0){
-					if((board.getBoardPiece(row-1, col)).checkForMine()==false)//checks up
+					if((board.getBoardPiece(row-1, col)).checkForMine())//checks up
 					{
 						counter = counter+1;
 					}
 					
 					if(col+1<colSize){
-						if((board.getBoardPiece(row-1, col+1)).checkForMine()==false)//checks right-up
+						if((board.getBoardPiece(row-1, col+1)).checkForMine())//checks right-up
 						{
 							counter = counter+1;
 						}
-						if((board.getBoardPiece(row, col+1)).checkForMine()==false)//checks right
+						if((board.getBoardPiece(row, col+1)).checkForMine())//checks right
 						{
 							counter = counter+1;
 						}
 					}
 					
 					if(col-1>=0){
-						if((board.getBoardPiece(row-1, col-1)).checkForMine()==false)//check left-up
+						if((board.getBoardPiece(row-1, col-1)).checkForMine())//check left-up
 						{
 							counter = counter+1;
 						}
-						if((board.getBoardPiece(row, col-1)).checkForMine()==false)//checks left
+						if((board.getBoardPiece(row, col-1)).checkForMine())//checks left
 						{
 							counter = counter+1;
 						}
@@ -62,15 +63,15 @@
 				}
 				
 				if(row+1<rowSize){
-					if((board.getBoardPiece(row+1, col)).checkForMine()==false)//checks down
+					if((board.getBoardPiece(row+1, col)).checkForMine())//checks down
 					{
 						counter = counter+1;
 					}
-					if((board.getBoardPiece(row+1, col+1)).checkForMine()==false)//check right-down
+					if((board.getBoardPiece(row+1, col+1)).checkForMine())//check right-down
 					{
 						counter = counter+1;
 					}
-					if((board.getBoardPiece(row+1, col-1)).checkForMine()==false)//checks left-down
+					if((board.getBoardPiece(row+1, col-1)).checkForMine())//checks left-down
 					{
 						counter = counter+1;
 					}
