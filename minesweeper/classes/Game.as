@@ -23,7 +23,7 @@
 		}
 		public function changeFlag( row:int,col:int ):void
 		{
-			board.getBoardPiece(row, col).toggleFlagged();
+			(board.getBoardPiece(row, col)).toggleFlagged();
 		}
 		public function Checker( row:int, col:int ):Boolean //recursive function that checks around the selected spot 
 		{
