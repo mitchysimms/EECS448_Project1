@@ -39,6 +39,7 @@
 				changeFlag(evt.currentTarget.getRow(), evt.currentTarget.getCol());
 			}
 		}
+		
 		public function isEmpty( row:int, col:int ):Boolean //returns false if there's a bomb, true if it's an empty space
 		{
 			if((board.getBoardPiece(row, col)).checkForMine()==false)
@@ -134,6 +135,7 @@
 		private var rowSize:int;
 		private var colSize:int;
 		private var counter:int;
+		private var flagCount:int;
 		
     }
 }
