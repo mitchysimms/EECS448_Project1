@@ -1,4 +1,5 @@
 ﻿package classes
+
 {
 	import flash.events.MouseEvent
 	import flash.events.Event
