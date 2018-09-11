@@ -1,7 +1,7 @@
 ﻿package classes
 {
-	import flash.events.MouseEvent
-	import flash.events.Event
+	import flash.events.MouseEvent;
+	import flash.events.Event;
 	import classes.Board;
 	import classes.BoardPiece;
     public class Game 
