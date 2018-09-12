@@ -10,10 +10,6 @@
 		private var gameBoard:Array;
 		
 		
-        public function Board(){
-             
-        }
-		
 		public function Board(userRowsChoice:int, userColsChoice:int, userMinesChoice:int){
 			rowTotal = userRowsChoice;
 			colsTotal = userColsChoice;
@@ -22,9 +18,9 @@
 		}
 		
 		public function fillBoardArray():void{
-			for (i = 0; i < rowTotal; i++){
+			for (var i = 0; i < rowTotal; i++){
 				gameBoard[i] = new Array(colsTotal)
-				for (j = 0; j < colsTotal; j++){
+				for (var j = 0; j < colsTotal; j++){
 					gameBoard[i][j] = new BoardPiece(i, j);
 				}
 			}
@@ -49,8 +45,8 @@
 			var mineCounter:int = 0;
 			var boardTraceCounter:int = 0;
 			
-			for (i = 0; i < rowTotal; i){
-				for (j = 0; j < colsTotal; j){
+			for (var i = 0; i < rowTotal; i){
+				for (var j = 0; j < colsTotal; j){
 					boardTraceCounter = Math.random() * colsTotal - 1;
 					j += boardTraceCounter;
 					gameBoard[i][j].setMine();
@@ -68,7 +64,7 @@
 		}
 		
 		public function getCols():int{
-			return colTotal;
+			return colsTotal;
 		}
 		
 		public function getBoardPiece(desiredRow:int, desiredCol:int):BoardPiece{

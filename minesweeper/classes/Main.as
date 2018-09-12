@@ -14,6 +14,7 @@
 		var numMines:int;
         public function Main()
         {
+			stop();
 			trace("main is working as document class");
 			inputRows.restrict = "0-9";
 			inputCols.restrict = "0-9";
@@ -31,6 +32,7 @@
 		}
 		private function beginGame():void
 		{
+			gotoAndStop(2);
 			var gameBoard:Board = new Board(numRows, numCols, numMines);
 			var theGame:Game = new Game(gameBoard);
 		}

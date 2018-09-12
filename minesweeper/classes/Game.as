@@ -7,10 +7,9 @@
 	import classes.BoardPiece;
     public class Game 
     {
-        public function Game( boardPassed:Board ) //initialize private variables, set clicks, call isEmpty function for left click, setFlag for right click
+        public function Game( board:Board ) //initialize private variables, set clicks, call isEmpty function for left click, setFlag for right click
         {
-             board = new Board();
-	     board = boardPassed;
+			
 			rowSize = board.getRows();
 			colSize = board.getCols();
 			counter = 0;
@@ -130,6 +129,7 @@
 				}
 				
 			}
+			return false;
 		}
 		//private var m_array:Array;
 		private var board:Board;
