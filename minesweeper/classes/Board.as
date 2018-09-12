@@ -1,7 +1,11 @@
 ﻿package classes
 {
 	import classes.BoardPiece;
-
+	import flash.display.*;
+	import flash.events.Event;
+	import flash.events.MouseEvent;
+	import flash.text.*;
+		import flash.display.MovieClip;
     public class Board
     {
 		private var rowTotal:int;
@@ -20,6 +24,7 @@
 			minesTotal = userMinesChoice;
 			gameBoard = [];
 			fillBoardArray();
+			setBoardMines();
 		}
 
 		public function fillBoardArray():void{
