@@ -59,7 +59,7 @@
 		}
 		public function Checker( row:int, col:int ):Boolean //recursive function that checks around the selected spot 
 		{
-			if(row==rowSize || col==colSize)
+			if(row==rowSize || col==colSize || row<0 || col<0)
 			{
 				return true;
 			}
@@ -99,13 +99,19 @@
 					{
 						counter = counter+1;
 					}
-					if((board.getBoardPiece(row+1, col+1)).checkForMine())//check right-down
+					if (col+1<colSize)
 					{
-						counter = counter+1;
+						if((board.getBoardPiece(row+1, col+1)).checkForMine())//check right-down
+						{
+							counter = counter+1;
+						}
 					}
-					if((board.getBoardPiece(row+1, col-1)).checkForMine())//checks left-down
+					if (col-1>=0)
 					{
-						counter = counter+1;
+						if((board.getBoardPiece(row+1, col-1)).checkForMine())//checks left-down
+						{
+							counter = counter+1;
+						}
 					}
 				}
 				
