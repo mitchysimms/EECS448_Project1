@@ -1,8 +1,11 @@
 ﻿package classes
 {
 	import classes.BoardPiece;
-
-    public class Board
+	import flash.events.MouseEvent;
+	import flash.events.Event;
+	import flash.display.MovieClip;
+	
+    public class Board extends MovieClip
     {
 		private var rowTotal:int;
 		private var colsTotal:int;
