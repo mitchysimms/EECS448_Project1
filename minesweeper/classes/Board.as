@@ -46,6 +46,9 @@
 				if (gameBoard[x][y].isEmpty()){
 					gameBoard[x][y].setMine();
 				}
+				else {
+					i--;
+				}
 			}
 		}
 
