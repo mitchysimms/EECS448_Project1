@@ -34,25 +34,7 @@
 			}
 		}
 
-
-		//Here, try this. I bet it works
-		/*
 		public function setBoardMines():void{
-			var mineCounter:int = 0;
-
-			while (mineCounter != minesTotal) {
-				var x:int = Math.random() * rowsTotal - 1;
-				var y:int = Math.random() * colsTotal - 1;
-				if (!gameBoard[x][y].checkForMine()) {
-					gameBoard[x][y].setMine();
-					mineCounter++;
-				}
-			}
-		}
-		*/
-
-
-		public function setBoardMines(){
 			for(i = 0; i < minesTotal; i++){
 				var x:int = Math.floor(Math.Random() * rowsTotal);
 				var y:int = Math.floot(Math.Random() * colsTotal);
