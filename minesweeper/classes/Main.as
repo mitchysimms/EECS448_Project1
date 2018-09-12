@@ -7,6 +7,7 @@
     import flash.display.MovieClip;
 	import classes.Board;
 	import classes.Game;
+	import classes.BoardPiece;
     public class Main extends MovieClip
     {
 		var numRows:int;
@@ -32,9 +33,11 @@
 		}
 		private function beginGame():void
 		{
+			inputsOkButton.removeEventListener(MouseEvent.CLICK, takeIn);
 			gotoAndStop(2);
 			var gameBoard:Board = new Board(numRows, numCols, numMines);
 			var theGame:Game = new Game(gameBoard);
+			addChild(gameBoard);
 		}
     }
 }
