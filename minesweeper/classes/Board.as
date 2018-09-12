@@ -16,6 +16,7 @@
 			minesTotal = userMinesChoice;
 			gameBoard = [];
 			fillBoardArray();
+			setBoardMines();
 		}
 
 		public function fillBoardArray():void{

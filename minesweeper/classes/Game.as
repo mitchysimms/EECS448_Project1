@@ -9,18 +9,18 @@
 
     public class Game extends MovieClip
     {
-        public function Game( board:Board ) //initialize private variables, set clicks, call isEmpty function for left click, setFlag for right click
+        public function Game( myBoard:Board ) //initialize private variables, set clicks, call isEmpty function for left click, setFlag for right click
         {
-			
-			rowSize = board.getRows();
-			colSize = board.getCols();
+			board = myBoard;
+			rowSize = myBoard.getRows();
+			colSize = myBoard.getCols();
 			counter = 0;
 			flagCount = 0;
 			for (var i:int = 0; i < rowSize; i++) {
 				for (var j:int = 0; j < colSize; j++) {
-					board.getBoardPiece(i, j).addEventListener(MouseEvent.CLICK, handleClick);
-					board.getBoardPiece(i, j).addEventListener(MouseEvent.RIGHT_CLICK, handleRightClick);
-					board.getBoardPiece(i, j).buttonMode = true;
+					myBoard.getBoardPiece(i, j).addEventListener(MouseEvent.CLICK, handleClick);
+					myBoard.getBoardPiece(i, j).addEventListener(MouseEvent.RIGHT_CLICK, handleRightClick);
+					myBoard.getBoardPiece(i, j).buttonMode = true;
 				}
 			}
         }
@@ -32,6 +32,7 @@
 		}
 		
 		public function handleRightClick(evt:MouseEvent):void {
+				trace(board.getMines());
 			if (evt.currentTarget.currentFrame == 10) {
 				flagCount++;
 			}
@@ -57,6 +58,7 @@
 		}
 		public function changeFlag( row:int,col:int ):void
 		{
+			trace("");
 			(board.getBoardPiece(row, col)).toggleFlagged();
 		}
 		public function Checker( row:int, col:int ):Boolean //recursive function that checks around the selected spot 
