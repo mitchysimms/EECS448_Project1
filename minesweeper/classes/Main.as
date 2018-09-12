@@ -7,6 +7,7 @@
     import flash.display.MovieClip;
 	import classes.Board;
 	import classes.Game;
+	import classes.BoardPiece;
     public class Main extends MovieClip
     {
 		var numRows:int;
@@ -14,6 +15,7 @@
 		var numMines:int;
         public function Main()
         {
+			stop();
 			trace("main is working as document class");
 			inputRows.restrict = "0-9";
 			inputCols.restrict = "0-9";
@@ -31,8 +33,11 @@
 		}
 		private function beginGame():void
 		{
+			inputsOkButton.removeEventListener(MouseEvent.CLICK, takeIn);
+			gotoAndStop(2);
 			var gameBoard:Board = new Board(numRows, numCols, numMines);
 			var theGame:Game = new Game(gameBoard);
+			addChild(gameBoard);
 		}
     }
 }

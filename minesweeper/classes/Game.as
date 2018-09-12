@@ -5,12 +5,13 @@
 	import flash.events.Event;
 	import classes.Board;
 	import classes.BoardPiece;
-    public class Game
+	import flash.display.MovieClip;
+
+    public class Game extends MovieClip
     {
-        public function Game( boardPassed:Board ) //initialize private variables, set clicks, call isEmpty function for left click, setFlag for right click
+        public function Game( board:Board ) //initialize private variables, set clicks, call isEmpty function for left click, setFlag for right click
         {
-             board = new Board();
-	     board = boardPassed;
+
 			rowSize = board.getRows();
 			colSize = board.getCols();
 			counter = 0;
@@ -19,6 +20,7 @@
 				for (var j:int = 0; j < colSize; j++) {
 					board.getBoardPiece(i, j).addEventListener(MouseEvent.CLICK, handleClick);
 					board.getBoardPiece(i, j).addEventListener(MouseEvent.RIGHT_CLICK, handleRightClick);
+					board.getBoardPiece(i, j).buttonMode = true;
 				}
 			}
         }
@@ -136,6 +138,7 @@
 				}
 
 			}
+			return false;
 		}
 		//private var m_array:Array;
 		private var board:Board;

@@ -27,7 +27,6 @@
 			 this.hasMine = false;
 			 this.row = Row;
 			 this.col = Col;
-			trace("this is working");
         }
 
 		public function getRow():int {
