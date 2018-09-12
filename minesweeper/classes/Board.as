@@ -1,6 +1,12 @@
 ﻿package classes
 {
 	import classes.BoardPiece;
+	import flash.display.*;
+	import flash.events.Event;
+	import flash.events.MouseEvent;
+	import flash.text.*;
+	import flash.display.MovieClip;
+	import classes.BoardPiece;
 	import flash.display.MovieClip;
 
     public class Board extends MovieClip
@@ -9,7 +15,7 @@
 		private var colsTotal:int;
 		private var minesTotal:int;
 		private var gameBoard:Array;
-		
+
 		public function Board(userRowsChoice:int, userColsChoice:int, userMinesChoice:int){
 			rowTotal = userRowsChoice;
 			colsTotal = userColsChoice;
@@ -42,7 +48,7 @@
 				}
 			}
 		}
-		
+
 
 		public function getMines():int {
 			return minesTotal;
@@ -61,4 +67,3 @@
 		}
     }
 }
-
