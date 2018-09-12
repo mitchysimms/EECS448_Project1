@@ -48,7 +48,6 @@
 		*/
 
 
-		//this is incomplete, ill need some help on it.
 		public function setBoardMines(){
 			for(i = 0; i < minesTotal; i++){
 				var x:int = Math.Random() * rowsTotal -1;
