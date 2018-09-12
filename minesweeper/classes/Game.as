@@ -5,7 +5,9 @@
 	import flash.events.Event;
 	import classes.Board;
 	import classes.BoardPiece;
-    public class Game 
+	import flash.display.MovieClip;
+
+    public class Game extends MovieClip
     {
         public function Game( board:Board ) //initialize private variables, set clicks, call isEmpty function for left click, setFlag for right click
         {
