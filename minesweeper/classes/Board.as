@@ -19,6 +19,7 @@
 			colsTotal = userColsChoice;
 			minesTotal = userMinesChoice;
 			gameBoard = [];
+			fillBoardArray();
 		}
 
 		public function fillBoardArray():void{
@@ -26,6 +27,9 @@
 				gameBoard[i] = new Array(colsTotal)
 				for (j = 0; j < colsTotal; j++){
 					gameBoard[i][j] = new BoardPiece(i, j);
+					addChild(gameBoard[i][j]);
+					gameBoard[i][j].x = j*65 + 65/2;
+					gameBoard[i][j].y = j*65 + 65/2;
 				}
 			}
 		}
@@ -50,8 +54,8 @@
 
 		public function setBoardMines(){
 			for(i = 0; i < minesTotal; i++){
-				var x:int = Math.Random() * rowsTotal -1;
-				var y:int = Math.Random() * colsTotal -1;
+				var x:int = Math.floor(Math.Random() * rowsTotal);
+				var y:int = Math.floot(Math.Random() * colsTotal);
 
 				if (gameBoard[x][y].isEmpty()){
 					gameBoard[x][y].setMine();
