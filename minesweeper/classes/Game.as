@@ -50,7 +50,25 @@
 					board.setBoardMines(evt.currentTarget.getRow(), evt.currentTarget.getCol());
 				}
 				isEmpty(evt.currentTarget.getRow(), evt.currentTarget.getCol());
+				if (endCheck()) {
+					//end the game (win)
+				}
 			}
+		}
+		
+		public function endCheck():Boolean{
+			var count:int = 0;
+			for (var i:int = 0; i < rowSize; i++) {
+				for (var j:int = 0; j < colSize; j++) {
+					if (!board.getBoardPiece(i, j).checkForMine() && board.getBoardPiece(i, j).currentFrame != 10) {
+						count++;
+					}
+				}
+			}
+			if (count == rowSize*colSize - board.getMines()) {
+				return true;
+			}
+			return false;
 		}
 
 
@@ -65,11 +83,12 @@
 			{
 				revealMines();
 				board.getBoardPiece(row,col).gotoAndStop(13);
+				//end the game (loss)
 				return false; //Bomb explodes
 			}
 		}
 		
-		public function revealMines() {
+		public function revealMines():void {
 			for (var i:int = 0; i < rowSize; i++) {
 				for (var j:int = 0; j < colSize; j++) {
 					if (board.getBoardPiece(i, j).checkForMine()) {
