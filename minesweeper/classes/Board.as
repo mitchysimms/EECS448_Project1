@@ -29,11 +29,12 @@
 			for (var i = 0; i < rowTotal; i++){
 				gameBoard[i] = new Array(colsTotal)
 				for (var j = 0; j < colsTotal; j++){
-					trace("what up");
 					gameBoard[i][j] = new BoardPiece(i, j);
 					addChild(gameBoard[i][j]);
-					gameBoard[i][j].x = i*65 + 65/2;
-					gameBoard[i][j].y = j*65 + 65/2;
+					gameBoard[i][j].width = 35;
+					gameBoard[i][j].height = 35;
+					gameBoard[i][j].x = i*35;
+					gameBoard[i][j].y = j*35;
 				}
 			}
 		}

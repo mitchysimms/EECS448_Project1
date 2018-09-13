@@ -1,4 +1,4 @@
-
+﻿
 ﻿package classes
 
 {
@@ -54,12 +54,12 @@
 			}
 			else
 			{
+				board.getBoardPiece(row,col).gotoAndStop(13);
 				return false; //Bomb explodes
 			}
 		}
 		public function changeFlag( row:int,col:int ):void
 		{
-			trace("");
 			(board.getBoardPiece(row, col)).toggleFlagged();
 		}
 		public function Checker( row:int, col:int ):Boolean //recursive function that checks around the selected spot
@@ -123,14 +123,58 @@
 				if(counter==0)
 				{
 					(board.getBoardPiece(row, col)).gotoAndStop(9); //switch frame to empty
-					Checker(row, col+1);
-					Checker(row, col-1);
-					Checker(row+1, col);
-					Checker(row+1, col+1);
-					Checker(row+1, col-1);
-					Checker(row-1, col);
-					Checker(row-1, col+1);
-					Checker(row-1, col-1);
+					if (row-1>=0)
+					{
+						if((board.getBoardPiece(row-1, col)).currentFrame == 10)//checks left-down
+						{
+							Checker(row-1, col);
+						}
+						
+						if(col+1<colSize)
+						{
+							if((board.getBoardPiece(row-1, col+1)).currentFrame == 10)//checks left-down
+							{
+							Checker(row-1, col+1);
+							}
+							if((board.getBoardPiece(row, col+1)).currentFrame == 10)//checks left-down
+							{
+							Checker(row, col+1);
+							}
+							
+						}
+						if(col-1>=0)
+						{
+							if((board.getBoardPiece(row-1, col-1)).currentFrame == 10)//checks left-down
+							{
+							Checker(row-1, col-1);
+							}
+							if((board.getBoardPiece(row, col-1)).currentFrame == 10)//checks left-down
+							{
+							Checker(row, col-1);
+							}
+						}
+					}
+					if (row+1<rowSize)
+					{
+						if((board.getBoardPiece(row+1, col)).currentFrame == 10)//checks left-down
+						{
+							Checker(row+1, col);
+						}
+						if(col+1<colSize)
+						{
+							if((board.getBoardPiece(row+1, col+1)).currentFrame == 10)//checks left-down
+							{
+								Checker(row+1, col+1);
+							}
+						}
+						if(col-1>=0)
+						{
+							if((board.getBoardPiece(row+1, col-1)).currentFrame == 10)//checks left-down
+							{
+							Checker(row+1, col-1);
+							}
+						}
+					}
 					return true;
 				}
 				if(counter!=0)
