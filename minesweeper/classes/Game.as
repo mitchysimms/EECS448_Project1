@@ -44,7 +44,7 @@
 				}
 			}
 			else if (evt.currentTarget.currentFrame >= 1 && evt.currentTarget.currentFrame <= 8) {
-				if (countFlags(evt.currentTarget.currentFrame) == evt.currentTarget.currentFrame) {
+				if (countFlags(evt.currentTarget.currentFrame,evt.currentTarget.getRow(), evt.currentTarget.getCol()) == evt.currentTarget.currentFrame) {
 					clearSurrounding(evt.currentTarget.getRow(), evt.currentTarget.getCol());
 				}
 			}
@@ -61,24 +61,24 @@
 			}
 		}
 
-		public function clearSurrounding(row:int, col:int):int {
+		public function clearSurrounding(row:int, col:int):void {
 			if (row-1>=0)
 			{
-				if(board.getBoardPiece(row-1,  col)).currentFrame >= 0 && board.getBoardPiece(row-1,  col).currentFrame <= 8)//checks left-down
+				if(board.getBoardPiece(row-1,  col).currentFrame >= 0 && board.getBoardPiece(row-1,  col).currentFrame <= 8)//checks left-down
 				{
 					isEmpty(row-1,  col);
 				}
 
 				if(col+1<colSize)
 				{
-					if(board.getBoardPiece(row-1,  col+1)).currentFrame >= 0 && board.getBoardPiece(row-1,  col+1).currentFrame <= 8)//checks left-down
+					if(board.getBoardPiece(row-1,  col+1).currentFrame >= 0 && board.getBoardPiece(row-1,  col+1).currentFrame <= 8)//checks left-down
 					{
 					isEmpty(row-1,  col+1);
 					}
 				}
 				if(col-1>=0)
 				{
-					if(board.getBoardPiece(row-1,  col-1)).currentFrame >= 0 && board.getBoardPiece(row-1,  col-1).currentFrame <= 8)//checks left-down
+					if(board.getBoardPiece(row-1,  col-1).currentFrame >= 0 && board.getBoardPiece(row-1,  col-1).currentFrame <= 8)//checks left-down
 					{
 					isEmpty(row-1,  col-1);
 					}
@@ -88,34 +88,34 @@
 
 			if(col+1<colSize)
 			{
-				if(board.getBoardPiece(row,  col+1)).currentFrame >= 0 && board.getBoardPiece(row,  col+1).currentFrame <= 8)//checks left-down
+				if(board.getBoardPiece(row,  col+1).currentFrame >= 0 && board.getBoardPiece(row,  col+1).currentFrame <= 8)//checks left-down
 				{
 					isEmpty(row,  col+1);
 				}
 			}
 			if(col-1>=0)
 			{
-				if(board.getBoardPiece(row,  col-1)).currentFrame >= 0 && board.getBoardPiece(row,  col-1).currentFrame <= 8)//checks left-down
+				if(board.getBoardPiece(row,  col-1).currentFrame >= 0 && board.getBoardPiece(row,  col-1).currentFrame <= 8)//checks left-down
 				{
 					isEmpty(row,  col-1);
 				}
 			}
 			if (row+1<rowSize)
 			{
-				if(board.getBoardPiece(row+1,  col)).currentFrame >= 0 && board.getBoardPiece(row+1,  col).currentFrame <= 8)//checks left-down
+				if(board.getBoardPiece(row+1,  col).currentFrame >= 0 && board.getBoardPiece(row+1,  col).currentFrame <= 8)//checks left-down
 				{
 					isEmpty(row+1,  col);
 				}
 				if(col+1<colSize)
 				{
-					if(board.getBoardPiece(row+1,  col+1)).currentFrame >= 0 && board.getBoardPiece(row+1,  col+1).currentFrame <= 8)//checks left-down
+					if(board.getBoardPiece(row+1,  col+1).currentFrame >= 0 && board.getBoardPiece(row+1,  col+1).currentFrame <= 8)//checks left-down
 					{
 						isEmpty(row+1,  col+1);
 					}
 				}
 				if(col-1>=0)
 				{
-					if(board.getBoardPiece(row+1,  col-1)).currentFrame >= 0 && board.getBoardPiece(row+1,  col-1).currentFrame <= 8)//checks left-down
+					if(board.getBoardPiece(row+1,  col-1).currentFrame >= 0 && board.getBoardPiece(row+1,  col-1).currentFrame <= 8)//checks left-down
 					{
 					isEmpty(row+1,  col-1);
 					}
@@ -123,7 +123,7 @@
 			}
 		}
 
-		public function countFlags(x:int):int {
+		public function countFlags(x:int,row:int,col:int):int {
 			var count:int = 0;
 			if (row-1>=0)
 			{
