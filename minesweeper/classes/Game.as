@@ -63,10 +63,22 @@
 			}
 			else
 			{
+				revealMines();
 				board.getBoardPiece(row,col).gotoAndStop(13);
 				return false; //Bomb explodes
 			}
 		}
+		
+		public function revealMines() {
+			for (var i:int = 0; i < rowSize; i++) {
+				for (var j:int = 0; j < colSize; j++) {
+					if (board.getBoardPiece(i, j).checkForMine()) {
+						board.getBoardPiece(i, j).gotoAndStop(12);
+					}
+				}
+			}
+		}
+		
 		public function changeFlag( row:int,col:int ):void
 		{
 			
