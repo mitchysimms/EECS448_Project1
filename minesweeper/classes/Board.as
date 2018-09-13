@@ -21,9 +21,7 @@
 			colsTotal = userColsChoice;
 			minesTotal = userMinesChoice;
 			gameBoard = [];
-			fillBoardArray();
-			setBoardMines();
-			
+			fillBoardArray();			
 		}
 
 		public function fillBoardArray():void{
@@ -42,12 +40,12 @@
 			}
 		}
 
-		public function setBoardMines():void{
+		public function setBoardMines(row:int, col:int):void{
 			for(var i = 0; i < minesTotal; i++){
 				var x:int = Math.floor(Math.random() * rowTotal);
 				var y:int = Math.floor(Math.random() * colsTotal);
 
-				if (gameBoard[x][y].isEmpty()){
+				if (gameBoard[x][y].isEmpty() && !(x == row && y == col)){
 					gameBoard[x][y].setMine();
 				}
 				else {

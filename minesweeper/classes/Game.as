@@ -17,6 +17,7 @@
 			colSize = myBoard.getCols();
 			counter = 0;
 			flagCount = 0;
+			firstClick = true;
 			for (var i:int = 0; i < rowSize; i++) {
 				for (var j:int = 0; j < colSize; j++) {
 					myBoard.getBoardPiece(i, j).addEventListener(MouseEvent.CLICK, handleClick);
@@ -44,6 +45,10 @@
 			}
 			
 			else if (evt.currentTarget.currentFrame == 10) {
+				if (firstClick) {
+					firstClick = false;
+					board.setBoardMines(evt.currentTarget.getRow(), evt.currentTarget.getCol());
+				}
 				isEmpty(evt.currentTarget.getRow(), evt.currentTarget.getCol());
 			}
 		}
@@ -215,6 +220,7 @@
 		private var colSize:int;
 		private var counter:int;
 		private var flagCount:int;
+		private var firstClick:Boolean;
 
     }
 }
