@@ -15,6 +15,8 @@
 		var numMines:int;
         public function Main()
         {
+			stage.scaleMode = StageScaleMode.NO_SCALE; 
+			stage.align = StageAlign.TOP_LEFT; 
 			stop();
 			trace("main is working as document class");
 			inputRows.restrict = "0-9";

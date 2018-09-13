@@ -8,14 +8,14 @@
 	import flash.display.MovieClip;
 	import classes.BoardPiece;
 	import flash.display.MovieClip;
-
+	
     public class Board extends MovieClip
     {
 		private var rowTotal:int;
 		private var colsTotal:int;
 		private var minesTotal:int;
 		private var gameBoard:Array;
-
+		
 		public function Board(userRowsChoice:int, userColsChoice:int, userMinesChoice:int){
 			rowTotal = userRowsChoice;
 			colsTotal = userColsChoice;
@@ -23,6 +23,7 @@
 			gameBoard = [];
 			fillBoardArray();
 			setBoardMines();
+			
 		}
 
 		public function fillBoardArray():void{
@@ -35,6 +36,8 @@
 					gameBoard[i][j].height = 35;
 					gameBoard[i][j].x = i*35;
 					gameBoard[i][j].y = j*35;
+					
+					
 				}
 			}
 		}
