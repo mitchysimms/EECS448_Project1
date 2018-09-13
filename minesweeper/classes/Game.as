@@ -20,30 +20,34 @@
 			for (var i:int = 0; i < rowSize; i++) {
 				for (var j:int = 0; j < colSize; j++) {
 					myBoard.getBoardPiece(i, j).addEventListener(MouseEvent.CLICK, handleClick);
-					myBoard.getBoardPiece(i, j).addEventListener(MouseEvent.RIGHT_CLICK, handleRightClick);
 					myBoard.getBoardPiece(i, j).buttonMode = true;
 				}
 			}
         }
 
 		public function handleClick(evt:MouseEvent):void {
-			if (evt.currentTarget.currentFrame == 10) {
+			
+			
+			if(evt.shiftKey == true){
+				
+				if (evt.currentTarget.currentFrame == 11){
+					evt.currentTarget.gotoAndStop(10);
+					flagCount--;
+					return;
+				}
+				if (flagCount < board.getMines()) {
+					if (evt.currentTarget.currentFrame == 10) {
+						flagCount++;
+						evt.currentTarget.gotoAndStop(11);
+					}
+				}
+			}
+			
+			else if (evt.currentTarget.currentFrame == 10) {
 				isEmpty(evt.currentTarget.getRow(), evt.currentTarget.getCol());
 			}
 		}
 
-		public function handleRightClick(evt:MouseEvent):void {
-
-			if (evt.currentTarget.currentFrame == 11){
-				flagCount--;
-			}
-			if (flagCount < board.getMines()) {
-				if (evt.currentTarget.currentFrame == 10) {
-					flagCount++;
-				}
-				changeFlag(evt.currentTarget.getRow(), evt.currentTarget.getCol());
-			}
-		}
 
 		public function isEmpty( row:int, col:int ):Boolean //returns false if there's a bomb, true if it's an empty space
 		{
@@ -60,7 +64,7 @@
 		}
 		public function changeFlag( row:int,col:int ):void
 		{
-			(board.getBoardPiece(row, col)).toggleFlagged();
+			
 		}
 		public function Checker( row:int, col:int ):Boolean //recursive function that checks around the selected spot
 		{
