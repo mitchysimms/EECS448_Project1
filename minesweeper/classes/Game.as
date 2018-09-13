@@ -48,7 +48,6 @@
 					clearSurrounding(evt.currentTarget.getRow(), evt.currentTarget.getCol());
 				}
 			}
-
 			else if (evt.currentTarget.currentFrame == 10) {
 				if (firstClick) {
 					firstClick = false;
@@ -64,21 +63,21 @@
 		public function clearSurrounding(row:int, col:int):void {
 			if (row-1>=0)
 			{
-				if(board.getBoardPiece(row-1,  col).currentFrame >= 0 && board.getBoardPiece(row-1,  col).currentFrame <= 8)//checks left-down
+				if(board.getBoardPiece(row-1,  col).currentFrame == 10)//checks left-down
 				{
 					isEmpty(row-1,  col);
 				}
 
 				if(col+1<colSize)
 				{
-					if(board.getBoardPiece(row-1,  col+1).currentFrame >= 0 && board.getBoardPiece(row-1,  col+1).currentFrame <= 8)//checks left-down
+					if(board.getBoardPiece(row-1,  col+1).currentFrame == 10)//checks left-down
 					{
 					isEmpty(row-1,  col+1);
 					}
 				}
 				if(col-1>=0)
 				{
-					if(board.getBoardPiece(row-1,  col-1).currentFrame >= 0 && board.getBoardPiece(row-1,  col-1).currentFrame <= 8)//checks left-down
+					if(board.getBoardPiece(row-1,  col-1).currentFrame == 10)//checks left-down
 					{
 					isEmpty(row-1,  col-1);
 					}
@@ -88,34 +87,34 @@
 
 			if(col+1<colSize)
 			{
-				if(board.getBoardPiece(row,  col+1).currentFrame >= 0 && board.getBoardPiece(row,  col+1).currentFrame <= 8)//checks left-down
+				if(board.getBoardPiece(row,  col+1).currentFrame == 10)//checks left-down
 				{
 					isEmpty(row,  col+1);
 				}
 			}
 			if(col-1>=0)
 			{
-				if(board.getBoardPiece(row,  col-1).currentFrame >= 0 && board.getBoardPiece(row,  col-1).currentFrame <= 8)//checks left-down
+				if(board.getBoardPiece(row,  col-1).currentFrame == 10)//checks left-down
 				{
 					isEmpty(row,  col-1);
 				}
 			}
 			if (row+1<rowSize)
 			{
-				if(board.getBoardPiece(row+1,  col).currentFrame >= 0 && board.getBoardPiece(row+1,  col).currentFrame <= 8)//checks left-down
+				if(board.getBoardPiece(row+1,  col).currentFrame == 10)//checks left-down
 				{
 					isEmpty(row+1,  col);
 				}
 				if(col+1<colSize)
 				{
-					if(board.getBoardPiece(row+1,  col+1).currentFrame >= 0 && board.getBoardPiece(row+1,  col+1).currentFrame <= 8)//checks left-down
+					if(board.getBoardPiece(row+1,  col+1).currentFrame == 10)//checks left-down
 					{
 						isEmpty(row+1,  col+1);
 					}
 				}
 				if(col-1>=0)
 				{
-					if(board.getBoardPiece(row+1,  col-1).currentFrame >= 0 && board.getBoardPiece(row+1,  col-1).currentFrame <= 8)//checks left-down
+					if(board.getBoardPiece(row+1,  col-1).currentFrame == 10)//checks left-down
 					{
 					isEmpty(row+1,  col-1);
 					}
