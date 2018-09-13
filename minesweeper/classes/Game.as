@@ -55,9 +55,24 @@
 				}
 				isEmpty(evt.currentTarget.getRow(), evt.currentTarget.getCol());
 				if (endCheck()) {
-					//end the game (win)
+					for (var i:int = 0; i < rowSize; i++) {
+						for (var j:int = 0; j < colSize; j++) {
+							if (board.getBoardPiece(i,j).checkForMine()) {
+								board.getBoardPiece(i,j).gotoAndStop(11);
+							}
+						}
+					}					
+					endGame();
 				}
 			}
+		}
+		
+		public function endGame():void {
+			for (var i:int = 0; i < rowSize; i++) {
+				for (var j:int = 0; j < colSize; j++) {
+					board.getBoardPiece(i, j).removeEventListener(MouseEvent.CLICK, handleClick);
+				}
+			}			
 		}
 
 		public function clearSurrounding(row:int, col:int):void {
@@ -213,7 +228,7 @@
 			{
 				revealMines();
 				board.getBoardPiece(row,col).gotoAndStop(13);
-				//end the game (loss)
+				endGame();
 				return false; //Bomb explodes
 			}
 		}
