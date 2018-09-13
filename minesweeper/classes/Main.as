@@ -30,8 +30,10 @@
 			numRows = Number(inputRows.text);
 			numCols = Number(inputCols.text);
 			numMines = Number(inputMines.text);
+			if(numMines < numRows * numCols){
+				beginGame();
+			}
 			
-			beginGame();
 		}
 		private function beginGame():void
 		{

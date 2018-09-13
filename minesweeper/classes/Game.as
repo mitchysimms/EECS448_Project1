@@ -85,10 +85,7 @@
 						{
 							counter = counter+1;
 						}
-						if((board.getBoardPiece(row, col+1)).checkForMine())//checks right
-						{
-							counter = counter+1;
-						}
+						
 					}
 
 					if(col-1>=0){
@@ -96,13 +93,23 @@
 						{
 							counter = counter+1;
 						}
+						
+					}
+				}
+				if(col+1<colSize){
+					if((board.getBoardPiece(row, col+1)).checkForMine())//checks right
+					{
+						counter = counter+1;
+					}
+				}
+				if(col-1>=0){
 						if((board.getBoardPiece(row, col-1)).checkForMine())//checks left
 						{
 							counter = counter+1;
 						}
-					}
+						
 				}
-
+				
 				if(row+1<rowSize){
 					if((board.getBoardPiece(row+1, col)).checkForMine())//checks down
 					{
@@ -140,11 +147,6 @@
 							{
 							Checker(row-1, col+1);
 							}
-							if((board.getBoardPiece(row, col+1)).currentFrame == 10)//checks left-down
-							{
-							Checker(row, col+1);
-							}
-							
 						}
 						if(col-1>=0)
 						{
@@ -152,12 +154,28 @@
 							{
 							Checker(row-1, col-1);
 							}
-							if((board.getBoardPiece(row, col-1)).currentFrame == 10)//checks left-down
-							{
-							Checker(row, col-1);
-							}
+							
 						}
 					}
+					
+					if(col+1<colSize)
+					{
+						if((board.getBoardPiece(row, col+1)).currentFrame == 10)//checks left-down
+						{
+							Checker(row, col+1);
+						}
+					}
+					if(col-1>=0)
+					{
+						if((board.getBoardPiece(row, col-1)).currentFrame == 10)//checks left-down
+						{
+							Checker(row, col-1);
+						}
+					}
+					
+							
+							
+							
 					if (row+1<rowSize)
 					{
 						if((board.getBoardPiece(row+1, col)).currentFrame == 10)//checks left-down
