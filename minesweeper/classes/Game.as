@@ -27,10 +27,10 @@
         }
 
 		public function handleClick(evt:MouseEvent):void {
-			
-			
+
+
 			if(evt.shiftKey == true){
-				
+
 				if (evt.currentTarget.currentFrame == 11){
 					evt.currentTarget.gotoAndStop(10);
 					flagCount--;
@@ -43,7 +43,12 @@
 					}
 				}
 			}
-			
+			else if (evt.currentTarget.currentFrame >= 1 && evt.currentTarget.currentFrame <= 8) {
+				if (countFlags(evt.currentTarget.currentFrame) == evt.currentTarget.currentFrame) {
+					clearSurrounding(evt.currentTarget.getRow(), evt.currentTarget.getCol());
+				}
+			}
+
 			else if (evt.currentTarget.currentFrame == 10) {
 				if (firstClick) {
 					firstClick = false;
@@ -55,7 +60,133 @@
 				}
 			}
 		}
-		
+
+		public function clearSurrounding(row:int, col:int):int {
+			if (row-1>=0)
+			{
+				if(board.getBoardPiece(row-1,  col)).currentFrame >= 0 && board.getBoardPiece(row-1,  col).currentFrame <= 8)//checks left-down
+				{
+					isEmpty(row-1,  col);
+				}
+
+				if(col+1<colSize)
+				{
+					if(board.getBoardPiece(row-1,  col+1)).currentFrame >= 0 && board.getBoardPiece(row-1,  col+1).currentFrame <= 8)//checks left-down
+					{
+					isEmpty(row-1,  col+1);
+					}
+				}
+				if(col-1>=0)
+				{
+					if(board.getBoardPiece(row-1,  col-1)).currentFrame >= 0 && board.getBoardPiece(row-1,  col-1).currentFrame <= 8)//checks left-down
+					{
+					isEmpty(row-1,  col-1);
+					}
+
+				}
+			}
+
+			if(col+1<colSize)
+			{
+				if(board.getBoardPiece(row,  col+1)).currentFrame >= 0 && board.getBoardPiece(row,  col+1).currentFrame <= 8)//checks left-down
+				{
+					isEmpty(row,  col+1);
+				}
+			}
+			if(col-1>=0)
+			{
+				if(board.getBoardPiece(row,  col-1)).currentFrame >= 0 && board.getBoardPiece(row,  col-1).currentFrame <= 8)//checks left-down
+				{
+					isEmpty(row,  col-1);
+				}
+			}
+			if (row+1<rowSize)
+			{
+				if(board.getBoardPiece(row+1,  col)).currentFrame >= 0 && board.getBoardPiece(row+1,  col).currentFrame <= 8)//checks left-down
+				{
+					isEmpty(row+1,  col);
+				}
+				if(col+1<colSize)
+				{
+					if(board.getBoardPiece(row+1,  col+1)).currentFrame >= 0 && board.getBoardPiece(row+1,  col+1).currentFrame <= 8)//checks left-down
+					{
+						isEmpty(row+1,  col+1);
+					}
+				}
+				if(col-1>=0)
+				{
+					if(board.getBoardPiece(row+1,  col-1)).currentFrame >= 0 && board.getBoardPiece(row+1,  col-1).currentFrame <= 8)//checks left-down
+					{
+					isEmpty(row+1,  col-1);
+					}
+				}
+			}
+		}
+
+		public function countFlags(x:int):int {
+			var count:int = 0;
+			if (row-1>=0)
+			{
+				if((board.getBoardPiece(row-1, col)).currentFrame == 11)//checks left-down
+				{
+					count++;
+				}
+
+				if(col+1<colSize)
+				{
+					if((board.getBoardPiece(row-1, col+1)).currentFrame == 11)//checks left-down
+					{
+					count++;
+					}
+				}
+				if(col-1>=0)
+				{
+					if((board.getBoardPiece(row-1, col-1)).currentFrame == 11)//checks left-down
+					{
+					count++;
+					}
+
+				}
+			}
+
+			if(col+1<colSize)
+			{
+				if((board.getBoardPiece(row, col+1)).currentFrame == 11)//checks left-down
+				{
+					count++;
+				}
+			}
+			if(col-1>=0)
+			{
+				if((board.getBoardPiece(row, col-1)).currentFrame == 11)//checks left-down
+				{
+					count++;
+				}
+			}
+			if (row+1<rowSize)
+			{
+				if((board.getBoardPiece(row+1, col)).currentFrame == 11)//checks left-down
+				{
+					count++;
+				}
+				if(col+1<colSize)
+				{
+					if((board.getBoardPiece(row+1, col+1)).currentFrame == 11)//checks left-down
+					{
+						count++;
+					}
+				}
+				if(col-1>=0)
+				{
+					if((board.getBoardPiece(row+1, col-1)).currentFrame == 11)//checks left-down
+					{
+					count++;
+					}
+				}
+			}
+			return count;
+		}
+
 		public function endCheck():Boolean{
 			var count:int = 0;
 			for (var i:int = 0; i < rowSize; i++) {
@@ -87,7 +218,7 @@
 				return false; //Bomb explodes
 			}
 		}
-		
+
 		public function revealMines():void {
 			for (var i:int = 0; i < rowSize; i++) {
 				for (var j:int = 0; j < colSize; j++) {
@@ -97,10 +228,10 @@
 				}
 			}
 		}
-		
+
 		public function changeFlag( row:int,col:int ):void
 		{
-			
+
 		}
 		public function Checker( row:int, col:int ):Boolean //recursive function that checks around the selected spot
 		{
@@ -121,7 +252,7 @@
 						{
 							counter = counter+1;
 						}
-						
+
 					}
 
 					if(col-1>=0){
@@ -129,7 +260,7 @@
 						{
 							counter = counter+1;
 						}
-						
+
 					}
 				}
 				if(col+1<colSize){
@@ -143,9 +274,9 @@
 						{
 							counter = counter+1;
 						}
-						
+
 				}
-				
+
 				if(row+1<rowSize){
 					if((board.getBoardPiece(row+1, col)).checkForMine())//checks down
 					{
@@ -176,7 +307,7 @@
 						{
 							Checker(row-1, col);
 						}
-						
+
 						if(col+1<colSize)
 						{
 							if((board.getBoardPiece(row-1, col+1)).currentFrame == 10)//checks left-down
@@ -190,10 +321,10 @@
 							{
 							Checker(row-1, col-1);
 							}
-							
+
 						}
 					}
-					
+
 					if(col+1<colSize)
 					{
 						if((board.getBoardPiece(row, col+1)).currentFrame == 10)//checks left-down
@@ -208,10 +339,10 @@
 							Checker(row, col-1);
 						}
 					}
-					
-							
-							
-							
+
+
+
+
 					if (row+1<rowSize)
 					{
 						if((board.getBoardPiece(row+1, col)).currentFrame == 10)//checks left-down
