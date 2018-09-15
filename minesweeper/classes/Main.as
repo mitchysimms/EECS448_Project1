@@ -21,7 +21,7 @@
 		/**
 		 * Number of mines to create board
 		 */		
-		var numMines:int;	
+		var numMines:int;
 		/**
 		 * Creates input text fields and aligns board
 		 * @post OK button is clicked
@@ -49,7 +49,7 @@
 			numRows = Number(inputRows.text);
 			numCols = Number(inputCols.text);
 			numMines = Number(inputMines.text);
-			if(numMines < numRows * numCols){
+			if(numMines < numRows * numCols && numMines > 0){
 				beginGame();
 			}
 			
