@@ -11,14 +11,32 @@
 	*/
 
 	import flash.display.MovieClip;
+	/**
+	 * Stores its row and column, and whether it has a mine
+	 */
     public class BoardPiece extends MovieClip
     {
+		/**
+		 * Whether the piece has a mine
+		 */		
 		private var hasMine:Boolean
+		/**
+		 * Row where this piece is on the board
+		 */		
 		private var row:int
+		/**
+		 * Column where this piece is on the board
+		 */		
 		private var col:int
 
 
 		//i dont think you can pass anything to a constructor in actionscript so we will have to call the setMine function
+		/**
+		 * Stores location in class variables and initializes hasMine to false
+		 * @post piece now knows where it is on the board and has no mine
+		 * @param Row row location of piece
+		 * @param Col column location of piece
+		 */	
         public function BoardPiece(Row:int, Col:int)
         {
 			//sets frame to unclicked when the board piece is created
@@ -28,19 +46,31 @@
 			 this.row = Row;
 			 this.col = Col;
         }
-
+		/**
+		 * Returns row location of piece
+		 * @return row location of piece
+		 */
 		public function getRow():int {
 			return row;
 		}
-
+		/**
+		 * Returns column location of piece
+		 * @return column location of piece
+		 */
 		public function getCol():int {
 			return col;
 		}
-
+		/**
+		 * Sets mine on the piece
+		 * @post hasMine is true
+		 */
 		public function setMine():void{
 			this.hasMine = true;
 		}
-
+		/**
+		 * Returns whether piece is empty
+		 * @return whether piece is empty
+		 */
 		public function isEmpty():Boolean{
                if(this.hasMine){
                     return false;
@@ -49,13 +79,19 @@
                     return true;
                }
           }
-
+		/**
+		 * Returns whether piece has a mine
+		 * @return whether piece has a mine
+		 */
 		public function checkForMine():Boolean{
 			return this.hasMine;
 		}
 
 
-
+		/**
+		 * Toggles piece between flagged and unflagged
+		 * @post piece is either unflagged or flagged if previously flagged or unflagged
+		 */
 		public function toggleFlagged():void{
 			if(this.currentFrame == 10){
 				this.gotoAndStop(11);

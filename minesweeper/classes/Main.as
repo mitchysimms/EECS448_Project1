@@ -4,15 +4,28 @@
 	import flash.events.Event;
 	import flash.events.MouseEvent;
 	import flash.text.*;
-    import flash.display.MovieClip;
-	import classes.Board;
 	import classes.Game;
-	import classes.BoardPiece;
+	/**
+	 * Handles the user input, creates a board with the parameters given, then gives it to a new game.
+	 */
     public class Main extends MovieClip
     {
+		/**
+		 * Number of rows to create board
+		 */
 		var numRows:int;
+		/**
+		 * Number of cols to create board
+		 */	
 		var numCols:int;
-		var numMines:int;
+		/**
+		 * Number of mines to create board
+		 */		
+		var numMines:int;	
+		/**
+		 * Creates input text fields and aligns board
+		 * @post OK button is clicked
+		 */
         public function Main()
         {
 			stage.scaleMode = StageScaleMode.NO_SCALE; 
@@ -25,6 +38,12 @@
 			
 			inputsOkButton.addEventListener(MouseEvent.CLICK, takeIn);
         }
+		/**
+		 * Stores user input in class variables, and calls beginGame()
+		 * @pre OK button is clicked
+		 * @post beginGame() is called, all variables for creating board are assigned
+		 * @param event MouseEvent object passed from the event listener
+		 */
 		private function takeIn(event:MouseEvent):void
 		{
 			numRows = Number(inputRows.text);
@@ -35,6 +54,11 @@
 			}
 			
 		}
+		/**
+		 * Creates board with given parameters and gives it to a new game
+		 * @pre numRows, numCols, numMines are all assigned values
+		 * @post new Board is created with these parameters, and Game is created with the board. Menu disappears
+		 */
 		private function beginGame():void
 		{
 			inputsOkButton.removeEventListener(MouseEvent.CLICK, takeIn);
