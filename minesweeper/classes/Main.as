@@ -46,10 +46,10 @@
 		 */
 		private function takeIn(event:MouseEvent):void
 		{
-			numRows = Number(inputRows.text);
-			numCols = Number(inputCols.text);
+			numCols = Number(inputRows.text);
+			numRows = Number(inputCols.text);
 			numMines = Number(inputMines.text);
-			if(numMines < numRows * numCols && numMines > 0){
+			if(numMines < numRows * numCols && numMines > 0 && numRows < 30 && numCols < 30){
 				beginGame();
 			}
 			
