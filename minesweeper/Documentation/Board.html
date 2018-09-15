@@ -7,8 +7,8 @@
 			scrollToNameAnchor();
 		</script><table class="titleTable" cellpadding="0" cellspacing="0" id="titleTable" style="display:none"><tr><td class="titleTableTitle" align="left">API Documentation</td><td class="titleTableTopNav" align="right"><a href="package-summary.html" onclick="loadClassListFrame('all-classes.html')">All Packages</a>&nbsp;|&nbsp;<a href="class-summary.html" onclick="loadClassListFrame('all-classes.html')">All Classes</a>&nbsp;|&nbsp;<a href="all-index-A.html" onclick="loadClassListFrame('index-list.html')">Index</a>&nbsp;|&nbsp;<a id="framesLink1" href="index.html?Board.html&amp;">Frames</a><a id="noFramesLink1" style="display:none" href="" onclick="parent.location=document.location"> No Frames </a></td><td class="titleTableLogo" align="right" rowspan="3"><img src="images/logo.jpg" class="logoImage" alt=" Adobe Logo " title=" Adobe Logo "></td></tr><tr class="titleTableRow2"><td class="titleTableSubTitle" id="subTitle" align="left">Board</td><td class="titleTableSubNav" id="subNav" align="right"><a href="#methodSummary">Methods</a></td></tr><tr class="titleTableRow3"><td colspan="3">&nbsp;</td></tr></table><script language="javascript" type="text/javascript" xml:space="preserve">
 				<!--
-				
-					if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Board"); titleBar_setSubNav(false,false,false,false,false,false,false,false,true,false,false	,false,false,false,false,false);}	
+
+					if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Board"); titleBar_setSubNav(false,false,false,false,false,false,false,false,true,false,false	,false,false,false,false,false);}
 				-->
 			</script><div xmlns:fn="http://www.w3.org/2005/xpath-functions" class="MainContent"><table class="classHeaderTable" cellpadding="0" cellspacing="0"><tr><td class="classHeaderTableLabel">Package</td><td><a href="package-detail.html" onclick="javascript:loadClassListFrame('class-list.html')">Top Level</a></td></tr><tr><td class="classHeaderTableLabel">Class</td><td class="classSignature">public  class  Board</td></tr><tr><td class="classHeaderTableLabel">Inheritance</td><td class="inheritanceList">Board  <img src="images/inherit-arrow.gif" title="Inheritance" alt="Inheritance" class="inheritArrow"> flash.display.MovieClip</td></tr></table><p></p><p></p><p></p>
 	 Stores 2D array of BoardPieces and board dimensions
@@ -33,8 +33,13 @@
 		 </p><span class="label"> Parameters </span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20px"></td><td><code><span class="label">userRowsChoice</span>:int</code> &mdash; number of rows chosen
 		 </td></tr><tr><td class="paramSpacer">&nbsp;</td></tr><tr><td width="20px"></td><td><code><span class="label">userColsChoice</span>:int</code> &mdash; number of columns chosen
 		 </td></tr><tr><td class="paramSpacer">&nbsp;</td></tr><tr><td width="20px"></td><td><code><span class="label">userMinesChoice</span>:int</code> &mdash; number of mines chosen
-		 </td></tr></table></div><a name="methodDetail"></a><div class="detailSectionHeader">Method Detail</div><a name="fillBoardArray()"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">fillBoardArray</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td></tr></table><div class="detailBody"><code> public function fillBoardArray():void</code><p></p><p></p><p>
+		 </td></tr></table>
+	   </p><p><span class="label"> Pre-/postconditions </span><table cellpadding="0" cellspacing="0" border="0"><tr>
+	   </td></tr><tr></tr><tr><td width="20px"></td><td><code><span class="label">post</span></code> &mdash; 2D array of BoardPieces is created according to dimensions</td></tr></table></p>
+	   </div><a name="methodDetail"></a><div class="detailSectionHeader">Method Detail</div><a name="fillBoardArray()"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">fillBoardArray</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td></tr></table><div class="detailBody"><code> public function fillBoardArray():void</code><p></p><p></p><p>
 		 Fills the 2D board array with new BoardPieces
+	 	 </p><p><span class="label"> Pre-/postconditions </span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20px"></td><td><code><span class="label">pre</span></code> &mdash; rowTotal, colsTotal, and minesTotal have all been assigned and array is initialized
+	 	 </td></tr><tr><td class="paramSpacer">&nbsp;</td></tr><tr><td width="20px"></td><td><code><span class="label">post</span></code> &mdash; 2D array of BoardPieces is created according to dimensions</td></tr></table></p>
 		 </p></div><a name="getBoardPiece()"></a><a name="getBoardPiece(int,int)"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">getBoardPiece</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td></tr></table><div class="detailBody"><code> public function getBoardPiece(desiredRow:int, desiredCol:int):<a href="BoardPiece.html">BoardPiece</a></code><p></p><p></p><p>
 		 Returns the BoardPiece at the given row and column
 		 </p><p><span class="label"> Parameters </span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20px"></td><td><code><span class="label">desiredRow</span>:int</code> &mdash; row of desired BoardPiece
@@ -53,4 +58,7 @@
 		 Randomly sets mines on the board in any position but the one clicked first
 		 </p><p><span class="label"> Parameters </span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20px"></td><td><code><span class="label">row</span>:int</code> &mdash; row of first click
 		 </td></tr><tr><td class="paramSpacer">&nbsp;</td></tr><tr><td width="20px"></td><td><code><span class="label">col</span>:int</code> &mdash; column of first click
-		 </td></tr></table></p></div><br/><br/><hr><br/><p></p><center class="copyright"><footer></footer><br/>Sat Sep 15 2018, 02:48 PM -05:00  </center></div></body></html><!--<br/>Sat Sep 15 2018, 02:48 PM -05:00  -->
+		 </td></tr></table></p>
+		 </p><p><span class="label"> Pre-/postconditions </span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20px"></td><td><code><span class="label">pre</span></code> &mdash; board is already created, one piece has been clicked already
+		 </td></tr><tr><td class="paramSpacer">&nbsp;</td></tr><tr><td width="20px"></td><td><code><span class="label">post</span></code> &mdash; board is full of randomly placed mines</td></tr></table></p>
+	 	 </div></div><br/><br/><hr><br/><p></p><center class="copyright"><footer></footer><br/>Sat Sep 15 2018, 02:48 PM -05:00  </center></div></body></html><!--<br/>Sat Sep 15 2018, 02:48 PM -05:00  -->
