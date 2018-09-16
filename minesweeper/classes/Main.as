@@ -49,7 +49,7 @@
 			numCols = Number(inputRows.text);
 			numRows = Number(inputCols.text);
 			numMines = Number(inputMines.text);
-			if(numMines < numRows * numCols && numMines > 0 && numRows < 30 && numCols < 30){
+			if(numMines < numRows * numCols && numMines > 0 && numRows < 30 && numCols < 30 && numRows > 1 && numCols > 1){
 				beginGame();
 			}
 			
