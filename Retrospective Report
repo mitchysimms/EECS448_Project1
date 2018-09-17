@@ -1,0 +1,75 @@
+
+
+PROJECT I
+Minesweeper
+EECS 448
+
+Adam Khan
+Matthew Eagle
+Mitch Simmons
+Natalia Leyba
+Zach Harris
+List of Meetings
+
+Meeting 1: September 2, 2018 7:00pm
+Location: Fishbowl, Eaton Hall
+Present: Zach, Matthew, Natalia, Mitch
+Topics: Language to use: Flash, divide up some work, set up next meeting time
+	
+Meeting 2: September 5th, 2018 9-11
+Location: Lab 1005, Eaton Hall
+All Present
+Topics: Finalized division of work and classes needed
+	Adam: Clicking in game.as and initialize private variables (constructor)
+	Mitch: Board.as
+	Mathew: Board pieces.as
+	Zach: Main.as
+	Natalia: Checking in game.as
+
+Meeting 3: September 5th, 2018 11.30-12
+Location: Eaton 1
+All Present
+Topics: defined order of object creation and calls:
+user input->main->board->board piece->main-> game
+
+Meeting 4: September 10th, 11am 
+Location: Eaton 1
+All Present
+Topics: Talked about flagging and board piece settings
+
+Meeting 5: September 12th, 9:00 - 11:00 am
+Location: Fishbowl
+All Present
+Topics: Finishing board setting, initial test of program, started fixing bugs
+
+
+Division of the Project
+Adam: 
+Constructor of Game.as: Handles user clicking. 
+Added extra feature: Clicking a number square with bombs marked to clear other squares
+Zach: 
+Set up initial game screen and flash file
+Main.as: Handles user inputs, deals with bad input and creates needed objects
+Matthew: 
+BoardPiece.as: Defined BoardPiece object and sets the different frames of the object
+Created and added the images that would be the frames of the BoardPiece objects
+Mitch: 
+Board.as: Defined Board object which creates and stores a 2D Array of BoardPiece objects and adds the board to the screen
+Natalia: 
+Checker and IsEmpty of Game.as: checks the specified index in the array and handles empty spaces with bombs around it, empty spaces with no bombs around it as well as bombs and switches frames of spaces checked.
+
+Challenges
+Learning a new Language: This challenge was overcomed by reading on the selected language and starting to code in it. 
+Dealing with object oriented programming in ActionScript: The main issue with object-oriented programming in As3 was accessing the flash file as we had to select one class to to deal with the flash file interaction. Main was the class that we decided would interact with our flash file and so we resolved this issue by only switching the frames and taking the user input in main.
+Dealing with creating documentation in ActionScript: ASDoc seemed to be the only tool to generate the documentation for As3 and initially we were not able to create the documentation. We fixed this issue by moving all the files to the same folder and deleting the package name, after this we were able to create our files’ documentation.
+Right clicking is not accepted in ActionScript: We started writing the code to allow users to flag spots in the board assuming the right-click functionality but once we started to run our program right-clicking didn’t seem to work even though it didn’t display any errors. We eventually figured out As3 does not accept right-clicking. We solved this issue to allow users to flag specific spots by establishing flag-setting with left-click+shift which is allowed by As3.
+Issues with recursive Checker method in Game.as: On the first test, our program worked for mines and spaces next to mines but our recursive function was not performing as wanted. Our method started recursing and checking for several spaces but eventually stopped without completing the checking. We realized once the recursive method went back to the space that was clicked on it was repeating the checking  that was already done overflowing the stack. We fixed this by including in our method the case where it was in a spot that was already checked, fixing our method.
+
+
+Possible Features to be Added
+Replay functionality: We would add a button on screen that allowed the user to bo back to our main screen and play again.
+Timer: We would add a timer that display in the screen that showed the time elapsed since the user clicks play until the win or lose the game.
+
+
+Retrospective Analysis of the Project Development
+	After developing a working prototype of our program we have analysed our project development and noted several improvements that could make our program better. One of the things we could have done differently is having an intermediate class that dealt better with managing our game class. This intermediate class could call the methods of our Game class so there was a better visualization of the flow of our program as well as improve modularity. We also noticed that we could have used a different programming language that was more commonly used currently that allowed easier interaction between our different classes and the display that the user would see and interact with. Even though As3 did allow us to have a nice user interface it was not as effective as we expected. Overall our program and our project development was successful as we were able to implement the required functionalities using object-oriented programming by diving fairly equally the different task and by communicating any issues or barriers that appeared throughout the development.
