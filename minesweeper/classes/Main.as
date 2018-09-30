@@ -37,6 +37,7 @@
 			inputMines.restrict = "0-9";
 			
 			inputsOkButton.addEventListener(MouseEvent.CLICK, takeIn);
+			inputsEasyButton.addEventListener(MouseEvent.CLICK, easyMode);
         }
 		/**
 		 * Stores user input in class variables, and calls beginGame()
@@ -66,6 +67,13 @@
 			var gameBoard:Board = new Board(numRows, numCols, numMines);
 			var theGame:Game = new Game(gameBoard);
 			addChild(gameBoard);
+		}
+		
+		private function easyMode(event:MouseEvent):void {
+			numCols = 9;
+			numRows = 9;
+			numMines = 10;
+			beginGame();
 		}
     }
 }
