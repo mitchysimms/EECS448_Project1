@@ -1,6 +1,7 @@
 ﻿﻿package classes
 {
 	import flash.events.MouseEvent;
+	import flash.events.KeyboardEvent;
 	import flash.events.Event;
 	import classes.Board;
 	import flash.display.MovieClip;
@@ -44,10 +45,36 @@
 			for (var i:int = 0; i < rowSize; i++) {
 				for (var j:int = 0; j < colSize; j++) {
 					myBoard.getBoardPiece(i, j).addEventListener(MouseEvent.CLICK, handleClick);
+					myBoard.getBoardPiece(i,j).addEventListener(KeyboardEvent.KEY_DOWN, cheatMode);
 					myBoard.getBoardPiece(i, j).buttonMode = true;
 				}
 			}
         }
+
+		public function cheatMode(evt:KeyboardEvent):void {
+			if(String.fromCharCode(evt.charCode) == "c")
+			{
+				for (var i:int = 0; i < rowSize; i++) {
+				for (var j:int = 0; j < colSize; j++) {
+					
+					Checker(i,j);
+				}
+			}
+			revealMines();
+			}
+			if(String.fromCharCode(evt.charCode) == "v")
+			{
+			revertCheat();	
+			}
+		}
+		
+		public function revertCheat():void {
+			for (var i:int = 0; i < rowSize; i++) {
+				for (var j:int = 0; j < colSize; j++) {
+				(board.getBoardPiece(i, j)).gotoAndStop(10);
+			}
+		}
+	}
 		/**
 		 * If unclear piece is clicked, piece is cleared or mine is set off. If unclicked piece is shift-clicked, flag is toggled and
 		 * flagCounter is updated. If numbered piece is clicked and that number of flags surround it, clicks all unclicked pieces around that piece.
