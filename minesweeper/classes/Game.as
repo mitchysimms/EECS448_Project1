@@ -7,11 +7,28 @@
 	import flash.events.MouseEvent;
 	import flash.text.*;
 	import classes.Game;
+	import flash.events.TimerEvent; 
+    import flash.utils.Timer;
+	import flash.net.SharedObject;
+    import flash.net.SharedObjectFlushStatus;
 	/**
 	 * Processes each move and checks whether the game is over
 	 */
     public class Game extends MovieClip
     {
+		public var localScores:SharedObject = SharedObject.getLocal("localScores");
+		/**
+		 * Type of game
+		 */
+		private var m_gameType:String;
+		/**
+		 * Player's name
+	 	*/
+		private var m_playerName:String;
+		/**
+		 * Timer for game
+		 */
+		private var timer:Timer = new Timer(1000, 0);
 		/**
 		 * Board object for the game
 		 */
@@ -37,8 +54,10 @@
 		 * @post all pieces respond to clicking
 		 * @param myBoard Board used for the game
 		 */
-        public function Game( myBoard:Board) //initialize private variables, set clicks, call isEmpty function for left click, setFlag for right click
+        public function Game( myBoard:Board, gameType:String, playerName:String) //initialize private variables, set clicks, call isEmpty function for left click, setFlag for right click
         {
+			m_gameType = gameType;
+			m_playerName = playerName;
 			board = myBoard;
 			rowSize = myBoard.getRows();
 			colSize = myBoard.getCols();
@@ -117,6 +136,7 @@
 			else if (evt.currentTarget.currentFrame == 10) {
 				if (firstClick) {
 					firstClick = false;
+					timer.start(); //Starts timer
 					board.setBoardMines(evt.currentTarget.getRow(), evt.currentTarget.getCol());
 				}
 				isEmpty(evt.currentTarget.getRow(), evt.currentTarget.getCol());
@@ -152,6 +172,43 @@
 					board.getBoardPiece(i, j).removeEventListener(MouseEvent.CLICK, handleClick);
 				}
 			}
+			recordGame();
+		}
+		/**
+		 * Records game data in text file
+		 * @pre Game has ended.
+		 * @post Game data has been written to file if a highscore has occured.
+		 */
+		public function recordGame():void{
+			timer.stop();
+			var newScore:Object = {
+				name: m_playerName,
+				score: timer.currentCount
+			};
+
+			if (localScores.data.easyMode == null) localScores.data.easyMode = new Array();
+			if (localScores.data.mediumMode == null) localScores.data.mediumMode = new Array();
+			if (localScores.data.hardMode == null) localScores.data.hardMode = new Array();
+
+			if (m_gameType == "easy")
+			{
+				localScores.data.easyMode.push(newScore);
+				localScores.data.easyMode.sortOn("score", Array.NUMERIC);
+				if (localScores.data.easyMode.length > 5) localScores.data.easyMode.pop();
+			}
+			else if (m_gameType == "medium")
+			{
+				localScores.data.mediumMode.push(newScore);
+				localScores.data.mediumMode.sortOn("score", Array.NUMERIC);
+				if (localScores.data.mediumMode.length > 5) localScores.data.mediumMode.pop();
+			}
+			else if (m_gameType == "hard")
+			{
+				localScores.data.hardMode.push(newScore);
+				localScores.data.hardMode.sortOn("score", Array.NUMERIC);
+				if (localScores.data.hardMode.length > 5) localScores.data.hardMode.pop();
+			}
+			localScores.flush();
 		}
 		/**
 		 * Clears unclicked pieces around a given piece

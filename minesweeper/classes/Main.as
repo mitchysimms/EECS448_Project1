@@ -5,19 +5,22 @@
 	import flash.events.MouseEvent;
 	import flash.text.*;
 	import classes.Game;
+	import flash.net.SharedObject;
+    import flash.net.SharedObjectFlushStatus;
 	/**
 	 * Handles the user input, creates a board with the parameters given, then gives it to a new game.
 	 */
     public class Main extends MovieClip
     {
+		var game:Game = new Game(new Board(0, 0, 0), gameType, playerName);
 		/**
 		 * Name of player
 		 */
-		var playerName:String = "Unkown";
+		var playerName:String = "";
 		/**
 		 * Type of game (initialized to custom)
 		 */
-		var gameType:String = "custom";
+		var gameType:String = "";
 		/**
 		 * Number of rows to create board
 		 */
@@ -71,7 +74,7 @@
 		{
 			gotoAndStop(3);
 			var gameBoard:Board = new Board(numRows, numCols, numMines);
-			var theGame:Game = new Game(gameBoard);
+			game = new Game(gameBoard, gameType, playerName);
 			addChild(gameBoard);
 		}
 
@@ -87,6 +90,28 @@
 		private function openLeaderboard(even:MouseEvent):void {
 			gotoAndStop(4);
 			inputsMainMenuButton.addEventListener(MouseEvent.CLICK, returnToMenu);
+			var scores = game.localScores.data;
+			if (scores.easyMode != null)
+			{
+				for (var i = 0; i < scores.easyMode.length; i++)
+				{
+					easyModeScores.text += i+1 + ".  " + scores.easyMode[i].name + "  ->  " + scores.easyMode[i].score + "\n";
+				}
+			}
+			if (scores.mediumMode != null)
+			{
+				for (var i = 0; i < scores.mediumMode.length; i++)
+				{
+					mediumModeScores.text += i+1 + ".  " + scores.mediumMode[i].name + "  ->  " + scores.mediumMode[i].score + "\n";
+				}
+			}
+			if (scores.hardMode != null)
+			{
+				for (var i = 0; i < scores.hardMode.length; i++)
+				{
+					hardModeScores.text += i+1 + ".  " + scores.hardMode[i].name + "  ->  " + scores.hardMode[i].score + "\n";
+				}
+			}
 		}
 
 		private function customMode(event:MouseEvent):void {
