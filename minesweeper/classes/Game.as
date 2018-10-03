@@ -71,7 +71,10 @@
 		public function revertCheat():void {
 			for (var i:int = 0; i < rowSize; i++) {
 				for (var j:int = 0; j < colSize; j++) {
-				(board.getBoardPiece(i, j)).gotoAndStop(10);
+					if( (board.getBoardPiece(i, j)).checkForClicked() == false)
+					{
+					(board.getBoardPiece(i, j)).gotoAndStop(10);
+					}
 			}
 		}
 	}
@@ -116,6 +119,7 @@
 					endGame();
 				}
 			}
+			(board.getBoardPiece(evt.currentTarget.getRow(), evt.currentTarget.getCol())).setClicked(); 
 		}
 		/**
 		 * Flags all non-flagged mines
@@ -156,6 +160,7 @@
 				if(board.getBoardPiece(row-1,  col).currentFrame == 10)//checks left-down
 				{
 					isEmpty(row-1,  col);
+					(board.getBoardPiece(row-1, col)).setClicked(); 
 				}
 
 				if(col+1<colSize)
@@ -163,6 +168,7 @@
 					if(board.getBoardPiece(row-1,  col+1).currentFrame == 10)//checks left-down
 					{
 					isEmpty(row-1,  col+1);
+						(board.getBoardPiece(row-1, col+1)).setClicked(); 
 					}
 				}
 				if(col-1>=0)
@@ -170,6 +176,7 @@
 					if(board.getBoardPiece(row-1,  col-1).currentFrame == 10)//checks left-down
 					{
 					isEmpty(row-1,  col-1);
+						(board.getBoardPiece(row-1, col-1)).setClicked(); 
 					}
 
 				}
@@ -180,6 +187,7 @@
 				if(board.getBoardPiece(row,  col+1).currentFrame == 10)//checks left-down
 				{
 					isEmpty(row,  col+1);
+					(board.getBoardPiece(row, col+1)).setClicked(); 
 				}
 			}
 			if(col-1>=0)
@@ -187,6 +195,7 @@
 				if(board.getBoardPiece(row,  col-1).currentFrame == 10)//checks left-down
 				{
 					isEmpty(row,  col-1);
+					(board.getBoardPiece(row, col-1)).setClicked(); 
 				}
 			}
 			if (row+1<rowSize)
@@ -194,12 +203,14 @@
 				if(board.getBoardPiece(row+1,  col).currentFrame == 10)//checks left-down
 				{
 					isEmpty(row+1,  col);
+					(board.getBoardPiece(row+1, col)).setClicked(); 
 				}
 				if(col+1<colSize)
 				{
 					if(board.getBoardPiece(row+1,  col+1).currentFrame == 10)//checks left-down
 					{
 						isEmpty(row+1,  col+1);
+						(board.getBoardPiece(row+1, col+1)).setClicked(); 
 					}
 				}
 				if(col-1>=0)
@@ -207,6 +218,7 @@
 					if(board.getBoardPiece(row+1,  col-1).currentFrame == 10)//checks left-down
 					{
 					isEmpty(row+1,  col-1);
+						(board.getBoardPiece(row+1, col-1)).setClicked(); 
 					}
 				}
 			}
@@ -473,6 +485,145 @@
 				if(counter!=0)
 				{
 					(board.getBoardPiece(row, col)).gotoAndStop(counter); //switch frame to counter
+					
+				}
+
+			}
+		}
+		public function cheatChecker( row:int, col:int ):void //recursive function that checks around the selected spot
+		{
+			var counter:int = 0;
+			if(row>=rowSize || col>=colSize || row<0 || col<0)
+			{
+				return;
+			}
+			else
+			{
+				if(row-1>=0){
+					if((board.getBoardPiece(row-1, col)).checkForMine())//checks up
+					{
+						counter = counter+1;
+					}
+
+					if(col+1<colSize){
+						if((board.getBoardPiece(row-1, col+1)).checkForMine())//checks right-up
+						{
+							counter = counter+1;
+						}
+
+					}
+
+					if(col-1>=0){
+						if((board.getBoardPiece(row-1, col-1)).checkForMine())//check left-up
+						{
+							counter = counter+1;
+						}
+
+					}
+				}
+				if(col+1<colSize){
+					if((board.getBoardPiece(row, col+1)).checkForMine())//checks right
+					{
+						counter = counter+1;
+					}
+				}
+				if(col-1>=0){
+						if((board.getBoardPiece(row, col-1)).checkForMine())//checks left
+						{
+							counter = counter+1;
+						}
+
+				}
+
+				if(row+1<rowSize){
+					if((board.getBoardPiece(row+1, col)).checkForMine())//checks down
+					{
+						counter = counter+1;
+					}
+					if (col+1<colSize)
+					{
+						if((board.getBoardPiece(row+1, col+1)).checkForMine())//check right-down
+						{
+							counter = counter+1;
+						}
+					}
+					if (col-1>=0)
+					{
+						if((board.getBoardPiece(row+1, col-1)).checkForMine())//checks left-down
+						{
+							counter = counter+1;
+						}
+					}
+				}
+
+				if(counter==0)
+				{
+					(board.getBoardPiece(row, col)).gotoAndStop(9); //switch frame to empty
+					if (row-1>=0)
+					{
+						if((board.getBoardPiece(row-1, col)).currentFrame == 10)//checks left-down
+						{
+							Checker(row-1, col);
+						}
+
+						if(col+1<colSize)
+						{
+							if((board.getBoardPiece(row-1, col+1)).currentFrame == 10)//checks left-down
+							{
+							Checker(row-1, col+1);
+							}
+						}
+						if(col-1>=0)
+						{
+							if((board.getBoardPiece(row-1, col-1)).currentFrame == 10)//checks left-down
+							{
+							Checker(row-1, col-1);
+							}
+
+						}
+					}
+
+					if(col+1<colSize)
+					{
+						if((board.getBoardPiece(row, col+1)).currentFrame == 10)//checks left-down
+						{
+							Checker(row, col+1);
+						}
+					}
+					if(col-1>=0)
+					{
+						if((board.getBoardPiece(row, col-1)).currentFrame == 10)//checks left-down
+						{
+							Checker(row, col-1);
+						}
+					}
+					if (row+1<rowSize)
+					{
+						if((board.getBoardPiece(row+1, col)).currentFrame == 10)//checks left-down
+						{
+							Checker(row+1, col);
+						}
+						if(col+1<colSize)
+						{
+							if((board.getBoardPiece(row+1, col+1)).currentFrame == 10)//checks left-down
+							{
+								Checker(row+1, col+1);
+							}
+						}
+						if(col-1>=0)
+						{
+							if((board.getBoardPiece(row+1, col-1)).currentFrame == 10)//checks left-down
+							{
+							Checker(row+1, col-1);
+							}
+						}
+					}
+					return;
+				}
+				if(counter!=0)
+				{
+					(board.getBoardPiece(row, col)).gotoAndStop(counter); //switch frame to counter
+					
 				}
 
 			}
