@@ -30,6 +30,11 @@ Talked about easy/medium/hard modes and delegated cheatmode to Bunty and Austin.
 Also brainstormed new features
 Next meeting: 10/2/18
 
+10/1/18
+In fishbowl during monday lab, all members present.
+Learned/explored adobe animate and combined it with other editors to make dev process easier
+Started implementing cheat mode
+
 10/2/18
 At Blake & Bunty's house, all members present
 Implemented most of cheat mode (WIP)
@@ -38,3 +43,4 @@ Todo:
 Disable clicks in cheatmode
 Recursively revealed tiles need to be set as clicked so that disabling cheat mode doesn't cover them back up
 Set up reading/writing to text file for leaderboard
+Celebrate Mckenna's new internship at Cerner!
