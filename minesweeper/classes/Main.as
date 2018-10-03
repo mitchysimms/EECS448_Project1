@@ -11,6 +11,14 @@
     public class Main extends MovieClip
     {
 		/**
+		 * Name of player
+		 */
+		var playerName:String = "Unkown";
+		/**
+		 * Type of game (initialized to custom)
+		 */
+		var gameType:String = "custom";
+		/**
 		 * Number of rows to create board
 		 */
 		var numRows:int;
@@ -52,6 +60,7 @@
 			numCols = Number(inputRows.text);
 			numRows = Number(inputCols.text);
 			numMines = Number(inputMines.text);
+			playerName = inputPlayerName.text;
 			if(numMines < numRows * numCols && numMines > 0 && numRows < 30 && numCols < 30 && numRows > 1 && numCols > 1){
 				beginGame();
 			}
@@ -67,7 +76,7 @@
 			inputsOkButton.removeEventListener(MouseEvent.CLICK, takeIn);
 			gotoAndStop(2);
 			var gameBoard:Board = new Board(numRows, numCols, numMines);
-			var theGame:Game = new Game(gameBoard);
+			var theGame:Game = new Game(gameBoard, playerName, gameType);
 			addChild(gameBoard);
 		}
 		
@@ -75,6 +84,7 @@
 			numCols = 9;
 			numRows = 9;
 			numMines = 10;
+			gameType = "easy";
 			beginGame();
 		}
 		
@@ -82,6 +92,7 @@
 			numCols = 16;
 			numRows = 16;
 			numMines = 40;
+			gameType = "medium";
 			beginGame();
 		}
 		
@@ -89,6 +100,7 @@
 			numCols = 16;
 			numRows = 30;
 			numMines = 99;
+			gameType = "hard";
 			beginGame();
 		}
     }

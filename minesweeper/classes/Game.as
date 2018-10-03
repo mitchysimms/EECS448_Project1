@@ -1,14 +1,23 @@
 ﻿﻿package classes
 {
-	import flash.events.MouseEvent;
+	import flash.display.*;
 	import flash.events.Event;
-	import classes.Board;
-	import flash.display.MovieClip;
+	import flash.events.MouseEvent;
+	import flash.text.*;
+	import classes.Game;
 	/**
 	 * Processes each move and checks whether the game is over
 	 */
     public class Game extends MovieClip
     {
+		/**
+		 * Game type
+		 */
+		private var m_gameType:String;
+		/**
+		 * Player's name
+		 */
+		private var m_playerName:String;
 		/**
 		 * Board object for the game
 		 */
@@ -34,8 +43,10 @@
 		 * @post all pieces respond to clicking
 		 * @param myBoard Board used for the game
 		 */
-        public function Game( myBoard:Board ) //initialize private variables, set clicks, call isEmpty function for left click, setFlag for right click
+        public function Game( myBoard:Board, playerName:String, gameType:String) //initialize private variables, set clicks, call isEmpty function for left click, setFlag for right click
         {
+			m_playerName = playerName;
+			m_gameType = gameType;
 			board = myBoard;
 			rowSize = myBoard.getRows();
 			colSize = myBoard.getCols();
@@ -114,7 +125,19 @@
 				for (var j:int = 0; j < colSize; j++) {
 					board.getBoardPiece(i, j).removeEventListener(MouseEvent.CLICK, handleClick);
 				}
-			}			
+			}
+
+			gotoAndStop(3); //Goes to frame #3.
+			//var myText:TextField = new TextField();
+			// displayText.width = 1000
+			// displayText.height = 1000
+			// displayText.multiline = true;
+			// var tf:TextFormat = new TextFormat();
+			// tf.size = 20;
+			// tf.font = "Times New Roman"
+			// displayText.htmlText = m_playerName;
+			// displayText.setTextFormat(tf);
+			// addChild(displayText);
 		}
 		/**
 		 * Clears unclicked pieces around a given piece
