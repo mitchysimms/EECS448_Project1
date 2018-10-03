@@ -21,6 +21,10 @@
 		 */		
 		private var hasMine:Boolean
 		/**
+		 * Whether the piece has a mine
+		 */		
+		private var isClicked:Boolean
+		/**
 		 * Row where this piece is on the board
 		 */		
 		private var row:int
@@ -43,6 +47,7 @@
 			this.gotoAndStop(10);
 
 			 this.hasMine = false;
+			 this.isClicked = false;
 			 this.row = Row;
 			 this.col = Col;
         }
@@ -67,6 +72,10 @@
 		public function setMine():void{
 			this.hasMine = true;
 		}
+
+		public function  setClicked():void{
+			this.isClicked = true;
+		}
 		/**
 		 * Returns whether piece is empty
 		 * @return whether piece is empty
@@ -85,6 +94,10 @@
 		 */
 		public function checkForMine():Boolean{
 			return this.hasMine;
+		}
+
+		public function checkForClicked():Boolean{
+			return this.isClicked;
 		}
 
 
