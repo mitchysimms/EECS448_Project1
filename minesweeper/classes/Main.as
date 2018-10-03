@@ -40,11 +40,8 @@
 			stage.align = StageAlign.TOP_LEFT; 
 			stop();
 			trace("main is working as document class");
-			inputRows.restrict = "0-9";
-			inputCols.restrict = "0-9";
-			inputMines.restrict = "0-9";
-			
-			inputsOkButton.addEventListener(MouseEvent.CLICK, takeIn);
+
+			inputsCustomButton.addEventListener(MouseEvent.CLICK, customMode);
 			inputsEasyButton.addEventListener(MouseEvent.CLICK, easyMode);
 			inputsMediumButton.addEventListener(MouseEvent.CLICK, mediumMode);
 			inputsHardButton.addEventListener(MouseEvent.CLICK, hardMode);
@@ -60,11 +57,9 @@
 			numCols = Number(inputRows.text);
 			numRows = Number(inputCols.text);
 			numMines = Number(inputMines.text);
-			playerName = inputPlayerName.text;
 			if(numMines < numRows * numCols && numMines > 0 && numRows < 30 && numCols < 30 && numRows > 1 && numCols > 1){
 				beginGame();
 			}
-			
 		}
 		/**
 		 * Creates board with given parameters and gives it to a new game
@@ -73,35 +68,59 @@
 		 */
 		private function beginGame():void
 		{
-			inputsOkButton.removeEventListener(MouseEvent.CLICK, takeIn);
-			gotoAndStop(2);
+			//inputsOkButton.removeEventListener(MouseEvent.CLICK, takeIn);
+			gotoAndStop(3);
 			var gameBoard:Board = new Board(numRows, numCols, numMines);
-			var theGame:Game = new Game(gameBoard, playerName, gameType);
+			var theGame:Game = new Game(gameBoard);
 			addChild(gameBoard);
+		}
+
+		private function customMode(event:MouseEvent):void {
+			if (inputPlayerName.length != 0)
+			{
+				playerName = inputPlayerName.text;
+				gotoAndStop(2);
+				inputRows.restrict = "0-9";
+				inputCols.restrict = "0-9";
+				inputMines.restrict = "0-9";
+				inputsOkButton.addEventListener(MouseEvent.CLICK, takeIn);
+			}
 		}
 		
 		private function easyMode(event:MouseEvent):void {
-			numCols = 9;
-			numRows = 9;
-			numMines = 10;
-			gameType = "easy";
-			beginGame();
+			if (inputPlayerName.length != 0)
+			{
+				playerName = inputPlayerName.text;
+				numCols = 9;
+				numRows = 9;
+				numMines = 10;
+				gameType = "easy";
+				beginGame();
+			}
 		}
 		
 		private function mediumMode(event:MouseEvent):void {
-			numCols = 16;
-			numRows = 16;
-			numMines = 40;
-			gameType = "medium";
-			beginGame();
+			if (inputPlayerName.length != 0)
+			{
+				playerName = inputPlayerName.text;
+				numCols = 16;
+				numRows = 16;
+				numMines = 40;
+				gameType = "medium";
+				beginGame();
+			}
 		}
 		
 		private function hardMode(event:MouseEvent):void {
-			numCols = 16;
-			numRows = 30;
-			numMines = 99;
-			gameType = "hard";
-			beginGame();
+			if (inputPlayerName.length != 0)
+			{
+				playerName = inputPlayerName.text;
+				numCols = 16;
+				numRows = 30;
+				numMines = 99;
+				gameType = "hard";
+				beginGame();
+			}
 		}
     }
 }
