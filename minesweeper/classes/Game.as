@@ -56,7 +56,7 @@
 			{
 				for (var i:int = 0; i < rowSize; i++) {
 				for (var j:int = 0; j < colSize; j++) {
-					
+					board.getBoardPiece(i, j).removeEventListener(MouseEvent.CLICK, handleClick);
 					Checker(i,j);
 				}
 			}
@@ -64,6 +64,10 @@
 			}
 			if(String.fromCharCode(evt.charCode) == "v")
 			{
+				for (var i:int = 0; i < rowSize; i++) {
+				for (var j:int = 0; j < colSize; j++) {
+					board.getBoardPiece(i, j).addEventListener(MouseEvent.CLICK, handleClick);
+				}}
 			revertCheat();	
 			}
 		}
