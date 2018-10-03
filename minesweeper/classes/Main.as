@@ -41,6 +41,7 @@
 			stop();
 			trace("main is working as document class");
 
+			inputsLeaderboardButton.addEventListener(MouseEvent.CLICK, openLeaderboard);
 			inputsCustomButton.addEventListener(MouseEvent.CLICK, customMode);
 			inputsEasyButton.addEventListener(MouseEvent.CLICK, easyMode);
 			inputsMediumButton.addEventListener(MouseEvent.CLICK, mediumMode);
@@ -68,11 +69,24 @@
 		 */
 		private function beginGame():void
 		{
-			//inputsOkButton.removeEventListener(MouseEvent.CLICK, takeIn);
 			gotoAndStop(3);
 			var gameBoard:Board = new Board(numRows, numCols, numMines);
 			var theGame:Game = new Game(gameBoard);
 			addChild(gameBoard);
+		}
+
+		private function returnToMenu(even:MouseEvent):void {
+			gotoAndStop(1);
+			inputsLeaderboardButton.addEventListener(MouseEvent.CLICK, openLeaderboard);
+			inputsCustomButton.addEventListener(MouseEvent.CLICK, customMode);
+			inputsEasyButton.addEventListener(MouseEvent.CLICK, easyMode);
+			inputsMediumButton.addEventListener(MouseEvent.CLICK, mediumMode);
+			inputsHardButton.addEventListener(MouseEvent.CLICK, hardMode);
+		}
+
+		private function openLeaderboard(even:MouseEvent):void {
+			gotoAndStop(4);
+			inputsMainMenuButton.addEventListener(MouseEvent.CLICK, returnToMenu);
 		}
 
 		private function customMode(event:MouseEvent):void {
@@ -83,6 +97,7 @@
 				inputRows.restrict = "0-9";
 				inputCols.restrict = "0-9";
 				inputMines.restrict = "0-9";
+				inputsMainMenuButton.addEventListener(MouseEvent.CLICK, returnToMenu);
 				inputsOkButton.addEventListener(MouseEvent.CLICK, takeIn);
 			}
 		}

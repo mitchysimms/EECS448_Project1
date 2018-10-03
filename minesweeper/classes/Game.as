@@ -12,7 +12,6 @@
 	 */
     public class Game extends MovieClip
     {
-		private var m_playerName:String;
 		/**
 		 * Board object for the game
 		 */
