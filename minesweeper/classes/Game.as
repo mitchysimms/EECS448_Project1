@@ -326,7 +326,7 @@
 		public function isEmpty( row:int, col:int ):void //returns false if there's a bomb, true if it's an empty space
 		{
 			if((board.getBoardPiece(row, col)).checkForMine()==false)
-			{
+			{ 
 				Checker(row, col);
 			}
 			else
