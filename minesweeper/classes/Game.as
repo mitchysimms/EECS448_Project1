@@ -18,6 +18,10 @@
     {
 		public var localScores:SharedObject = SharedObject.getLocal("localScores");
 		/**
+		 * Represents if the player won.
+		 */
+		private var didPlayerWin:Boolean = true;
+		/**
 		 * Type of game
 		 */
 		private var m_gameType:String;
@@ -172,12 +176,12 @@
 					board.getBoardPiece(i, j).removeEventListener(MouseEvent.CLICK, handleClick);
 				}
 			}
-			recordGame();
+			if(didPlayerWin) recordGame();
 		}
 		/**
-		 * Records game data in text file
-		 * @pre Game has ended.
-		 * @post Game data has been written to file if a highscore has occured.
+		 * Records game data in cookie
+		 * @pre Game has ended by winning.
+		 * @post Game data has been written to cookie if a highscore has occured.
 		 */
 		public function recordGame():void{
 			timer.stop();
@@ -392,6 +396,7 @@
 			{
 				revealMines();
 				board.getBoardPiece(row,col).gotoAndStop(13);
+				didPlayerWin = false;
 				endGame();
 			}
 		}

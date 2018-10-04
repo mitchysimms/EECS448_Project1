@@ -39,6 +39,7 @@
 		 */
         public function Main()
         {
+
 			stage.scaleMode = StageScaleMode.NO_SCALE; 
 			stage.align = StageAlign.TOP_LEFT; 
 			stop();
@@ -91,6 +92,7 @@
 			gotoAndStop(4);
 			inputsMainMenuButton.addEventListener(MouseEvent.CLICK, returnToMenu);
 			var scores = game.localScores.data;
+			//game.localScores.clear(); Testing purposes.
 			if (scores.easyMode != null)
 			{
 				for (var i = 0; i < scores.easyMode.length; i++)
