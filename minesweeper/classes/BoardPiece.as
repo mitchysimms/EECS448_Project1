@@ -21,10 +21,6 @@
 		 */		
 		private var hasMine:Boolean
 		/**
-		 * Whether the piece is clicked
-		 */		
-		private var isClicked:Boolean
-		/**
 		 * Row where this piece is on the board
 		 */		
 		private var row:int
@@ -32,7 +28,7 @@
 		 * Column where this piece is on the board
 		 */		
 		private var col:int
-		
+
 		//i dont think you can pass anything to a constructor in actionscript so we will have to call the setMine function
 		/**
 		 * Stores location in class variables and initializes hasMine to false
@@ -46,7 +42,6 @@
 			this.gotoAndStop(10);
 
 			 this.hasMine = false;
-			 this.isClicked = false;
 			 this.row = Row;
 			 this.col = Col;
         }
@@ -71,10 +66,6 @@
 		public function setMine():void{
 			this.hasMine = true;
 		}
-
-		public function  setClicked():void{
-			this.isClicked = true;
-		}
 		/**
 		 * Returns whether piece is empty
 		 * @return whether piece is empty
@@ -94,12 +85,6 @@
 		public function checkForMine():Boolean{
 			return this.hasMine;
 		}
-
-		public function checkForClicked():Boolean{
-			return this.isClicked;
-		}
-
-
 		/**
 		 * Toggles piece between flagged and unflagged
 		 * @post piece is either unflagged or flagged if previously flagged or unflagged

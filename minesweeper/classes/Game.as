@@ -169,8 +169,7 @@
 					flagAll();
 					endGame();
 				}
-			}
-			(board.getBoardPiece(evt.currentTarget.getRow(), evt.currentTarget.getCol())).setClicked(); 
+			} 
 		}
 		/**
 		 * Flags all non-flagged mines
@@ -246,41 +245,33 @@
 			if((row - 1 >= 0) && board.getBoardPiece(row-1,  col).currentFrame == 10)//checks top
 			{
 				isEmpty(row-1,  col);
-				(board.getBoardPiece(row-1, col)).setClicked(); 
 				if((col + 1 < colSize) && board.getBoardPiece(row-1,  col+1).currentFrame == 10)//checks top-right
 				{
 					isEmpty(row-1,  col+1);
-					(board.getBoardPiece(row-1, col+1)).setClicked(); 
 				}
 				if((col - 1 >= 0) && board.getBoardPiece(row-1,  col-1).currentFrame == 10)//checks top-left
 				{
-					isEmpty(row-1,  col-1);
-					(board.getBoardPiece(row-1, col-1)).setClicked(); 
+					isEmpty(row-1,  col-1); 
 				}
 			}
 			if((col + 1 < colSize) && board.getBoardPiece(row,  col+1).currentFrame == 10)//checks right
 			{
 				isEmpty(row,  col+1);
-				(board.getBoardPiece(row, col+1)).setClicked(); 
 			}
 			if((col - 1 >= 0) && board.getBoardPiece(row,  col-1).currentFrame == 10)//checks left
 			{
 				isEmpty(row,  col-1);
-				(board.getBoardPiece(row, col-1)).setClicked(); 
 			}
 			if((row + 1 < rowSize) && board.getBoardPiece(row+1,  col).currentFrame == 10)//checks down
 			{
 				isEmpty(row+1,  col);
-				(board.getBoardPiece(row+1, col)).setClicked(); 
 				if((col + 1 < colSize) && board.getBoardPiece(row+1,  col+1).currentFrame == 10)//checks down-right
 				{
 					isEmpty(row+1,  col+1);
-					(board.getBoardPiece(row+1, col+1)).setClicked();
 				}
 				if((col - 1 >= 0) && board.getBoardPiece(row+1,  col-1).currentFrame == 10)//checks down-left
 				{
-					isEmpty(row+1,  col-1);
-					(board.getBoardPiece(row+1, col-1)).setClicked(); 
+					isEmpty(row+1,  col-1); 
 				}
 			}
 		}
