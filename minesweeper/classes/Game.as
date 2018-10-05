@@ -53,6 +53,7 @@
 		 * Whether the next click is the first one
 		 */
 		private var firstClick:Boolean;
+		private var frameArray:Array = [];
 		/**
 		 * Stores or intitializes class variables, adds event listenser to all pieces
 		 * @post all pieces respond to clicking
@@ -80,18 +81,25 @@
 			if(String.fromCharCode(evt.charCode) == "c")
 			{
 				for (var i:int = 0; i < rowSize; i++) {
+					frameArray[i] = [];
 				for (var j:int = 0; j < colSize; j++) {
-					board.getBoardPiece(i, j).removeEventListener(MouseEvent.CLICK, handleClick);
-					Checker(i,j);
+					frameArray[i][j] = board.getBoardPiece(i, j).getFrame();
+				}
+				}
+
+				for (var k:int = 0; k < rowSize; k++) {
+				for (var l:int = 0; l < colSize; l++) {
+					board.getBoardPiece(k, l).removeEventListener(MouseEvent.CLICK, handleClick);
+					Checker(k,l);
 				}
 			}
 			revealMines();
 			}
 			if(String.fromCharCode(evt.charCode) == "v")
 			{
-				for (var i:int = 0; i < rowSize; i++) {
-				for (var j:int = 0; j < colSize; j++) {
-					board.getBoardPiece(i, j).addEventListener(MouseEvent.CLICK, handleClick);
+				for (var a:int = 0; a < rowSize; a++) {
+				for (var b:int = 0; b < colSize; b++) {
+					board.getBoardPiece(a, b).addEventListener(MouseEvent.CLICK, handleClick);
 				}}
 			revertCheat();	
 			}
@@ -100,10 +108,7 @@
 		public function revertCheat():void {
 			for (var i:int = 0; i < rowSize; i++) {
 				for (var j:int = 0; j < colSize; j++) {
-					if( (board.getBoardPiece(i, j)).checkForClicked() == false)
-					{
-					(board.getBoardPiece(i, j)).gotoAndStop(10);
-					}
+					(board.getBoardPiece(i, j)).gotoAndStop(frameArray[i][j]);
 			}
 		}
 	}
@@ -364,7 +369,6 @@
 			if((board.getBoardPiece(row, col)).checkForMine()==false)
 			{ 
 				Checker(row, col);
-				board.getBoardPiece(row, col).setClicked;
 			}
 			else
 			{

@@ -32,8 +32,7 @@
 		 * Column where this piece is on the board
 		 */		
 		private var col:int
-
-
+		
 		//i dont think you can pass anything to a constructor in actionscript so we will have to call the setMine function
 		/**
 		 * Stores location in class variables and initializes hasMine to false
@@ -112,6 +111,10 @@
 			if(this.currentFrame == 11){
 				this.gotoAndStop(10);
 			}
+		}
+
+		public function getFrame():int {
+			return(this.currentFrame);
 		}
     }
 }
