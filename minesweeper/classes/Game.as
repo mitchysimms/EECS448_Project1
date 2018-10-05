@@ -116,6 +116,11 @@
 			}
 		}
 		
+		/**
+		 * sets each piece to the frame obtained from the frameArray.
+		 * @pre board has been cheated on.
+		 *@post board is reverted back to previous state.
+		 */
 		public function revertCheat():void {
 			for (var i:int = 0; i < rowSize; i++) {
 				for (var j:int = 0; j < colSize; j++) {
