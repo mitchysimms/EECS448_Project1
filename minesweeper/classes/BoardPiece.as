@@ -21,7 +21,7 @@
 		 */		
 		private var hasMine:Boolean
 		/**
-		 * Whether the piece has a mine
+		 * Whether the piece is clicked
 		 */		
 		private var isClicked:Boolean
 		/**

@@ -222,71 +222,44 @@
 		 * @param col column of piece
 		 */
 		public function clearSurrounding(row:int, col:int):void {
-			if (row-1>=0)
+			if((row - 1 >= 0) && board.getBoardPiece(row-1,  col).currentFrame == 10)//checks top
 			{
-				if(board.getBoardPiece(row-1,  col).currentFrame == 10)//checks left-down
+				isEmpty(row-1,  col);
+				(board.getBoardPiece(row-1, col)).setClicked(); 
+				if((col + 1 < colSize) && board.getBoardPiece(row-1,  col+1).currentFrame == 10)//checks top-right
 				{
-					isEmpty(row-1,  col);
-					(board.getBoardPiece(row-1, col)).setClicked(); 
-				}
-
-				if(col+1<colSize)
-				{
-					if(board.getBoardPiece(row-1,  col+1).currentFrame == 10)//checks left-down
-					{
 					isEmpty(row-1,  col+1);
-						(board.getBoardPiece(row-1, col+1)).setClicked(); 
-					}
+					(board.getBoardPiece(row-1, col+1)).setClicked(); 
 				}
-				if(col-1>=0)
+				if((col - 1 >= 0) && board.getBoardPiece(row-1,  col-1).currentFrame == 10)//checks top-left
 				{
-					if(board.getBoardPiece(row-1,  col-1).currentFrame == 10)//checks left-down
-					{
 					isEmpty(row-1,  col-1);
-						(board.getBoardPiece(row-1, col-1)).setClicked(); 
-					}
-
+					(board.getBoardPiece(row-1, col-1)).setClicked(); 
 				}
 			}
-
-			if(col+1<colSize)
+			if((col + 1 < colSize) && board.getBoardPiece(row,  col+1).currentFrame == 10)//checks right
 			{
-				if(board.getBoardPiece(row,  col+1).currentFrame == 10)//checks left-down
-				{
-					isEmpty(row,  col+1);
-					(board.getBoardPiece(row, col+1)).setClicked(); 
-				}
+				isEmpty(row,  col+1);
+				(board.getBoardPiece(row, col+1)).setClicked(); 
 			}
-			if(col-1>=0)
+			if((col - 1 >= 0) && board.getBoardPiece(row,  col-1).currentFrame == 10)//checks left
 			{
-				if(board.getBoardPiece(row,  col-1).currentFrame == 10)//checks left-down
-				{
-					isEmpty(row,  col-1);
-					(board.getBoardPiece(row, col-1)).setClicked(); 
-				}
+				isEmpty(row,  col-1);
+				(board.getBoardPiece(row, col-1)).setClicked(); 
 			}
-			if (row+1<rowSize)
+			if((row + 1 < rowSize) && board.getBoardPiece(row+1,  col).currentFrame == 10)//checks down
 			{
-				if(board.getBoardPiece(row+1,  col).currentFrame == 10)//checks left-down
+				isEmpty(row+1,  col);
+				(board.getBoardPiece(row+1, col)).setClicked(); 
+				if((col + 1 < colSize) && board.getBoardPiece(row+1,  col+1).currentFrame == 10)//checks down-right
 				{
-					isEmpty(row+1,  col);
-					(board.getBoardPiece(row+1, col)).setClicked(); 
+					isEmpty(row+1,  col+1);
+					(board.getBoardPiece(row+1, col+1)).setClicked();
 				}
-				if(col+1<colSize)
+				if((col - 1 >= 0) && board.getBoardPiece(row+1,  col-1).currentFrame == 10)//checks down-left
 				{
-					if(board.getBoardPiece(row+1,  col+1).currentFrame == 10)//checks left-down
-					{
-						isEmpty(row+1,  col+1);
-						(board.getBoardPiece(row+1, col+1)).setClicked(); 
-					}
-				}
-				if(col-1>=0)
-				{
-					if(board.getBoardPiece(row+1,  col-1).currentFrame == 10)//checks left-down
-					{
 					isEmpty(row+1,  col-1);
-						(board.getBoardPiece(row+1, col-1)).setClicked(); 
-					}
+					(board.getBoardPiece(row+1, col-1)).setClicked(); 
 				}
 			}
 		}
@@ -391,6 +364,7 @@
 			if((board.getBoardPiece(row, col)).checkForMine()==false)
 			{ 
 				Checker(row, col);
+				board.getBoardPiece(row, col).setClicked;
 			}
 			else
 			{
@@ -555,7 +529,6 @@
 					(board.getBoardPiece(row, col)).gotoAndStop(counter); //switch frame to counter
 					
 				}
-
 			}
 		}
     }
