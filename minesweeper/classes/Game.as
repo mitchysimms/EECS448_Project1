@@ -53,6 +53,9 @@
 		 * Whether the next click is the first one
 		 */
 		private var firstClick:Boolean;
+		/**
+		 * Array to hold current frames of every tile. Used to perserve board state before everything is visible in cheat mode.
+		 */
 		private var frameArray:Array = [];
 		/**
 		 * Stores or intitializes class variables, adds event listenser to all pieces
@@ -77,9 +80,15 @@
 			}
         }
 
+		/**
+		 * Fills frameArray, deactivates ability to click, and reveals board. 
+		 * @post all board pieces are returned to the frames prior to cheat mode.
+		 * @param KeyboardEvent - used to see what key was pressed.
+		 */
 		public function cheatMode(evt:KeyboardEvent):void {
 			if(String.fromCharCode(evt.charCode) == "c")
 			{
+				//Cheat mode activated so now fill array with current board state.
 				for (var i:int = 0; i < rowSize; i++) {
 					frameArray[i] = [];
 				for (var j:int = 0; j < colSize; j++) {
@@ -87,6 +96,7 @@
 				}
 				}
 
+				//disables clicking and reveals all tiles.
 				for (var k:int = 0; k < rowSize; k++) {
 				for (var l:int = 0; l < colSize; l++) {
 					board.getBoardPiece(k, l).removeEventListener(MouseEvent.CLICK, handleClick);
@@ -95,6 +105,7 @@
 			}
 			revealMines();
 			}
+			//cheat mode deactivated, allow clicking and return board to original state. 
 			if(String.fromCharCode(evt.charCode) == "v")
 			{
 				for (var a:int = 0; a < rowSize; a++) {
