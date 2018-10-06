@@ -98,6 +98,10 @@
 			}
 		}
 
+		/**
+		* Returns what frame this current BoardPiece is in. 
+		* A frame number is returned to where the function was called. 
+		*/
 		public function getFrame():int {
 			return(this.currentFrame);
 		}
