@@ -333,7 +333,7 @@
 		* @pre Game is in progress
 		* @return Number of flagged mines
 		*/
-		public function betterFlagCount():int
+		public function countFlaggedMines():int
 		{
 			var flaggedMines:int = 0;
 			for(var i:int = 0; i < rowSize; i++)
@@ -354,7 +354,7 @@
 		 * @return whether board has been cleared
 		 */
 		public function endCheck():Boolean{
-			if(betterFlagCount() == board.getMines())
+			if(countFlaggedMines() == board.getMines())
 			{
 				return true;
 			}
