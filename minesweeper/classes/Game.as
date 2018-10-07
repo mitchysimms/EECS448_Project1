@@ -62,6 +62,8 @@
 		 * @post all pieces respond to clicking
 		 * @param myBoard Board used for the game
 		 */
+		 private var isClicked:Boolean = true; 
+
         public function Game( myBoard:Board, gameType:String, playerName:String) //initialize private variables, set clicks, call isEmpty function for left click, setFlag for right click
         {
 			m_gameType = gameType;
@@ -86,8 +88,11 @@
 		 * @param KeyboardEvent - used to see what key was pressed.
 		 */
 		public function cheatMode(evt:KeyboardEvent):void {
-			if(String.fromCharCode(evt.charCode) == "c")
+
+			
+			if(String.fromCharCode(evt.charCode) == "c" && isClicked)
 			{
+				isClicked = false;
 				//Cheat mode activated so now fill array with current board state.
 				for (var i:int = 0; i < rowSize; i++) {
 					frameArray[i] = [];
@@ -108,6 +113,7 @@
 			//cheat mode deactivated, allow clicking and return board to original state. 
 			if(String.fromCharCode(evt.charCode) == "v")
 			{
+				isClicked = true;
 				for (var a:int = 0; a < rowSize; a++) {
 				for (var b:int = 0; b < colSize; b++) {
 					board.getBoardPiece(a, b).addEventListener(MouseEvent.CLICK, handleClick);
@@ -194,6 +200,7 @@
 			for (var i:int = 0; i < rowSize; i++) {
 				for (var j:int = 0; j < colSize; j++) {
 					board.getBoardPiece(i, j).removeEventListener(MouseEvent.CLICK, handleClick);
+					board.getBoardPiece(i, j).removeEventListener(KeyboardEvent.KEY_DOWN, cheatMode);
 				}
 			}
 			if(didPlayerWin) recordGame();
