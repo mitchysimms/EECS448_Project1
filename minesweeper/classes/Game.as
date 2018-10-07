@@ -16,12 +16,9 @@
 	 */
     public class Game extends MovieClip
     {
-		/**
-		 * Shared object that stores the local leaderboard data
-		 */
 		public var localScores:SharedObject = SharedObject.getLocal("localScores");
 		/**
-		 * Represents if the player won
+		 * Represents if the player won.
 		 */
 		private var didPlayerWin:Boolean = true;
 		/**
@@ -66,6 +63,7 @@
 		 * @param myBoard Board used for the game
 		 */
 		 private var isClicked:Boolean = true; 
+		 private var inCheatMode:Boolean = false;
 
         public function Game( myBoard:Board, gameType:String, playerName:String) //initialize private variables, set clicks, call isEmpty function for left click, setFlag for right click
         {
@@ -96,6 +94,7 @@
 			if(String.fromCharCode(evt.charCode) == "c" && isClicked)
 			{
 				isClicked = false;
+				inCheatMode = true;
 				//Cheat mode activated so now fill array with current board state.
 				for (var i:int = 0; i < rowSize; i++) {
 					frameArray[i] = [];
@@ -114,9 +113,10 @@
 			revealMines();
 			}
 			//cheat mode deactivated, allow clicking and return board to original state. 
-			if(String.fromCharCode(evt.charCode) == "v")
+			if(String.fromCharCode(evt.charCode) == "v" && inCheatMode)
 			{
 				isClicked = true;
+				inCheatMode = false;
 				for (var a:int = 0; a < rowSize; a++) {
 				for (var b:int = 0; b < colSize; b++) {
 					board.getBoardPiece(a, b).addEventListener(MouseEvent.CLICK, handleClick);
@@ -126,7 +126,7 @@
 		}
 		
 		/**
-		 * Sets each piece to the frame obtained from the frameArray.
+		 * sets each piece to the frame obtained from the frameArray.
 		 * @pre board has been cheated on.
 		 *@post board is reverted back to previous state.
 		 */
@@ -361,7 +361,7 @@
 		 * @return whether board has been cleared
 		 */
 		public function endCheck():Boolean{
-			/*var count:int = 0;
+			var count:int = 0;
 			for (var i:int = 0; i < rowSize; i++) {
 				for (var j:int = 0; j < colSize; j++) {
 					if (!board.getBoardPiece(i, j).checkForMine() && board.getBoardPiece(i, j).currentFrame != 10) {
@@ -372,15 +372,7 @@
 			if (count == rowSize*colSize - board.getMines()) {
 				return true;
 			}
-			return false;*/
-			if(countFlags() == flagCount)
-			{
-				return true;
-			}
-			else 
-			{
-				return false;
-			}
+			return false;
 		}
 
 		/**
