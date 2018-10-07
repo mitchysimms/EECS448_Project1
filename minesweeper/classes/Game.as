@@ -353,6 +353,26 @@
 			return count;
 		}
 		/**
+		* Counts the number of flagged mines on the board
+		* @pre Game is in progress
+		* @return Number of flagged mines
+		*/
+		public function betterFlagCount():int
+		{
+			var flaggedMines:int = 0;
+			for(var i:int = 0; i < rowSize; i++)
+			{
+				for(var j:int = 0; j < colSize; j++)
+				{
+					if(board.getBoardPiece(i, j).checkForMine() && board.getBoardPiece(i, j).currentFrame == 11)
+					{
+						flaggedMines++;
+					}
+				}
+			}
+			return flaggedMines;
+		}
+		/**
 		 * Checks whether there are no more non-mine pieces that can be clicked
 		 * @pre a piece has just been clicked
 		 * @return whether board has been cleared
