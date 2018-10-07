@@ -63,6 +63,7 @@
 		 * @param myBoard Board used for the game
 		 */
 		 private var isClicked:Boolean = true; 
+		 private var inCheatMode:Boolean = false;
 
         public function Game( myBoard:Board, gameType:String, playerName:String) //initialize private variables, set clicks, call isEmpty function for left click, setFlag for right click
         {
@@ -93,6 +94,7 @@
 			if(String.fromCharCode(evt.charCode) == "c" && isClicked)
 			{
 				isClicked = false;
+				inCheatMode = true;
 				//Cheat mode activated so now fill array with current board state.
 				for (var i:int = 0; i < rowSize; i++) {
 					frameArray[i] = [];
@@ -111,9 +113,10 @@
 			revealMines();
 			}
 			//cheat mode deactivated, allow clicking and return board to original state. 
-			if(String.fromCharCode(evt.charCode) == "v")
+			if(String.fromCharCode(evt.charCode) == "v" && inCheatMode)
 			{
 				isClicked = true;
+				inCheatMode = false;
 				for (var a:int = 0; a < rowSize; a++) {
 				for (var b:int = 0; b < colSize; b++) {
 					board.getBoardPiece(a, b).addEventListener(MouseEvent.CLICK, handleClick);
