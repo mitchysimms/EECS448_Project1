@@ -317,7 +317,6 @@
 
 				}
 			}
-
 			if(col+1<colSize)
 			{
 				if((board.getBoardPiece(row, col+1)).currentFrame == 11)//checks left-down
@@ -381,7 +380,7 @@
 		 * @return whether board has been cleared
 		 */
 		public function endCheck():Boolean{
-			if(betterFlagCount() == flagCount)
+			if(betterFlagCount() == board.getMines())
 			{
 				return true;
 			}
