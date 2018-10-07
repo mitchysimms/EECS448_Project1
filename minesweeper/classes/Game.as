@@ -294,62 +294,36 @@
 		 */
 		public function countFlags(x:int,row:int,col:int):int {
 			var count:int = 0;
-			if (row-1>=0)
+			if((row - 1 >= 0) && board.getBoardPiece(row-1, col).currentFrame == 11)//checks top
 			{
-				if((board.getBoardPiece(row-1, col)).currentFrame == 11)//checks left-down
+				count++;
+				if((col + 1 < colSize) && board.getBoardPiece(row-1, col+1).currentFrame == 11)//checks top right
 				{
 					count++;
 				}
-
-				if(col+1<colSize)
-				{
-					if((board.getBoardPiece(row-1, col+1)).currentFrame == 11)//checks left-down
-					{
-					count++;
-					}
-				}
-				if(col-1>=0)
-				{
-					if((board.getBoardPiece(row-1, col-1)).currentFrame == 11)//checks left-down
-					{
-					count++;
-					}
-
-				}
-			}
-			if(col+1<colSize)
-			{
-				if((board.getBoardPiece(row, col+1)).currentFrame == 11)//checks left-down
+				if((col - 1 >= 0) && board.getBoardPiece(row-1, col-1).currentFrame == 11)//checks top left
 				{
 					count++;
 				}
 			}
-			if(col-1>=0)
+			if((col + 1 < colSize) && board.getBoardPiece(row, col+1).currentFrame == 11)//checks right
 			{
-				if((board.getBoardPiece(row, col-1)).currentFrame == 11)//checks left-down
-				{
-					count++;
-				}
+				count++;
 			}
-			if (row+1<rowSize)
+			if((col - 1 >= 0) && board.getBoardPiece(row, col-1).currentFrame == 11)//checks left
 			{
-				if((board.getBoardPiece(row+1, col)).currentFrame == 11)//checks left-down
+				count++;
+			}
+			if((row + 1 < rowSize) && board.getBoardPiece(row+1, col).currentFrame == 11)//checks bottom
+			{
+				count++;
+				if((col + 1 < colSize) && board.getBoardPiece(row+1, col+1).currentFrame == 11)//checks bottom right
 				{
 					count++;
 				}
-				if(col+1<colSize)
+				if((col - 1 >= 0) && board.getBoardPiece(row+1, col-1).currentFrame == 11)//checks bottom left
 				{
-					if((board.getBoardPiece(row+1, col+1)).currentFrame == 11)//checks left-down
-					{
-						count++;
-					}
-				}
-				if(col-1>=0)
-				{
-					if((board.getBoardPiece(row+1, col-1)).currentFrame == 11)//checks left-down
-					{
 					count++;
-					}
 				}
 			}
 			return count;
