@@ -16,9 +16,12 @@
 	 */
     public class Game extends MovieClip
     {
+		/**
+		 * Shared object that stores the local leaderboard data
+		 */
 		public var localScores:SharedObject = SharedObject.getLocal("localScores");
 		/**
-		 * Represents if the player won.
+		 * Represents if the player won
 		 */
 		private var didPlayerWin:Boolean = true;
 		/**
@@ -123,7 +126,7 @@
 		}
 		
 		/**
-		 * sets each piece to the frame obtained from the frameArray.
+		 * Sets each piece to the frame obtained from the frameArray.
 		 * @pre board has been cheated on.
 		 *@post board is reverted back to previous state.
 		 */

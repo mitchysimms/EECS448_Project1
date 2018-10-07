@@ -12,6 +12,9 @@
 	 */
     public class Main extends MovieClip
     {
+		/**
+		 * Represents the game object
+		 */
 		var game:Game = new Game(new Board(0, 0, 0), gameType, playerName);
 		/**
 		 * Name of player
@@ -78,7 +81,11 @@
 			game = new Game(gameBoard, gameType, playerName);
 			addChild(gameBoard);
 		}
-
+		/**
+		 * Set current frame to main menu and updates event listeners
+		 * @pre None
+		 * @post Main menu is displayed and live
+		 */
 		private function returnToMenu(even:MouseEvent):void {
 			gotoAndStop(1);
 			inputsLeaderboardButton.addEventListener(MouseEvent.CLICK, openLeaderboard);
@@ -87,7 +94,11 @@
 			inputsMediumButton.addEventListener(MouseEvent.CLICK, mediumMode);
 			inputsHardButton.addEventListener(MouseEvent.CLICK, hardMode);
 		}
-
+		/**
+		 * Opens leaderboard menu and populates leaderboard data
+		 * @pre None
+		 * @post Leaderboard is displayed
+		 */
 		private function openLeaderboard(even:MouseEvent):void {
 			gotoAndStop(4);
 			inputsMainMenuButton.addEventListener(MouseEvent.CLICK, returnToMenu);
@@ -115,7 +126,11 @@
 				}
 			}
 		}
-
+		/**
+		 * Goes to custom mode menu
+		 * @pre User has entered a name
+		 * @post Custom mode menu is live
+		 */
 		private function customMode(event:MouseEvent):void {
 			if (inputPlayerName.length != 0)
 			{
@@ -128,7 +143,11 @@
 				inputsOkButton.addEventListener(MouseEvent.CLICK, takeIn);
 			}
 		}
-		
+		/**
+		 * Starts game on Easy mode
+		 * @pre User has entered a name
+		 * @post Game has started with Easy mode
+		 */
 		private function easyMode(event:MouseEvent):void {
 			if (inputPlayerName.length != 0)
 			{
@@ -140,7 +159,11 @@
 				beginGame();
 			}
 		}
-		
+		/**
+		 * Starts game on Medium mode
+		 * @pre User has entered a name
+		 * @post Game has started with Medium mode
+		 */
 		private function mediumMode(event:MouseEvent):void {
 			if (inputPlayerName.length != 0)
 			{
@@ -152,7 +175,11 @@
 				beginGame();
 			}
 		}
-		
+		/**
+		 * Starts game on Hard mode
+		 * @pre User has entered a name
+		 * @post Game has started with Hard mode
+		 */
 		private function hardMode(event:MouseEvent):void {
 			if (inputPlayerName.length != 0)
 			{
