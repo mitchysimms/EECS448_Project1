@@ -358,7 +358,7 @@
 		 * @return whether board has been cleared
 		 */
 		public function endCheck():Boolean{
-			var count:int = 0;
+			/*var count:int = 0;
 			for (var i:int = 0; i < rowSize; i++) {
 				for (var j:int = 0; j < colSize; j++) {
 					if (!board.getBoardPiece(i, j).checkForMine() && board.getBoardPiece(i, j).currentFrame != 10) {
@@ -369,7 +369,15 @@
 			if (count == rowSize*colSize - board.getMines()) {
 				return true;
 			}
-			return false;
+			return false;*/
+			if(countFlags() == flagCount)
+			{
+				return true;
+			}
+			else 
+			{
+				return false;
+			}
 		}
 
 		/**
