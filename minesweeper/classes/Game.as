@@ -157,6 +157,11 @@
 						evt.currentTarget.gotoAndStop(11);
 					}
 				}
+				if(endCheck())
+				{
+					flagAll();
+					endGame();
+				}
 			}
 			else if (evt.currentTarget.currentFrame >= 1 && evt.currentTarget.currentFrame <= 8) {
 				if (countFlags(evt.currentTarget.currentFrame,evt.currentTarget.getRow(), evt.currentTarget.getCol()) == evt.currentTarget.currentFrame) {

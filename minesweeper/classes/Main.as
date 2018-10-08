@@ -103,7 +103,7 @@
 			gotoAndStop(4);
 			inputsMainMenuButton.addEventListener(MouseEvent.CLICK, returnToMenu);
 			var scores = game.localScores.data;
-			//game.localScores.clear(); Testing purposes.
+			//game.localScores.clear(); //Testing purposes.
 			if (scores.easyMode != null)
 			{
 				for (var i = 0; i < scores.easyMode.length; i++)
