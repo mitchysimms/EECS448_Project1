@@ -58,13 +58,18 @@
 		 */
 		private var frameArray:Array = [];
 		/**
+		 * used to see if 'c' has been clicked. There was a bug when activating cheat mode while already in cheat mode.
+		 */
+		private var isClicked:Boolean = true; 
+		/**
+		 * Used to make sure you're in cheat mode when trying to deactivate cheat mode. Trying to deactivate cheat mode when not in cheat mode also had a bug.
+		 */
+		private var inCheatMode:Boolean = false;
+		/**
 		 * Stores or intitializes class variables, adds event listenser to all pieces
 		 * @post all pieces respond to clicking
 		 * @param myBoard Board used for the game
 		 */
-		 private var isClicked:Boolean = true; 
-		 private var inCheatMode:Boolean = false;
-
         public function Game( myBoard:Board, gameType:String, playerName:String) //initialize private variables, set clicks, call isEmpty function for left click, setFlag for right click
         {
 			m_gameType = gameType;
