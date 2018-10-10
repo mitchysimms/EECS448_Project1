@@ -67,7 +67,7 @@ How was work split between teammates?
 Work was split up based on each new feature:
 Cheat Mode - Austin, Mckenna, Bunty
 Easy/Medium/Hard mode - Blake
-Leaderboard & timer - Seth
+Leaderboard, timer, auto-generated documentation - Seth
 Additional work such as bugfixing and documentation were split up based on whose changes caused bugs or needed to be documented. 
 
 What were the challenges and how were they overcome or dealt with?
@@ -77,7 +77,8 @@ group had any experience with actionscript or flash development, so there was a 
 interact with each other, what they do, and how to compile them. There was little documentation on these topics. After a lot 
 of research, we overcame this problem by discovering Adobe Animate and looking up tutorial projects online. After we had a 
 basic understanding of actionscript, the project was fairly straightforward and easy because we could use the code from the 
-existing project as an example.
+existing project as an example. Another problem was creating auto-generated documentation. The previous team used ASDoc, but after
+many failed attempts Natural Docs was used.
 
 Did any features not make the demo?
 
