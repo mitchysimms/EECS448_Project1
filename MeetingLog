@@ -1,4 +1,6 @@
-/Meeting Log:
+===================================================================================================================================
+Meeting Log
+===================================================================================================================================
 9/24/18
 In Class, Only Blake and Seth present.
 
@@ -39,11 +41,11 @@ Started implementing cheat mode
 At Blake & Bunty's house, all members present
 Implemented most of cheat mode (WIP)
 
-10/7/18
-At Blake & Bunty's house, all members present
-searched for bugs, fixed a few
-made final changes & talked about project 3
-agreed on a dnd app to manage players/encounters/combat etc.
+10/3/18
+In class, all members present
+Brainstormed ideas for project 3
+1. mobile game - falling shapes idea
+2. mobile app - discount/coupon search
 Discussed implementation of leaderboard
 Todo:
 Disable clicks in cheatmode
@@ -51,8 +53,40 @@ Recursively revealed tiles need to be set as clicked so that disabling cheat mod
 Set up reading/writing to text file for leaderboard
 Celebrate Mckenna's new internship at Cerner!
 
-10/3/18
-In class, all members present
-Brainstormed ideas for project 3
-1. mobile game - falling shapes idea
-2. mobile app - discount/coupon search
+10/7/18
+At Blake & Bunty's house, all members present
+searched for bugs, fixed a few
+made final changes & talked about project 3
+agreed on a dnd app that manages players/encounters/combat etc.
+
+===================================================================================================================================
+Retrospective Writeup
+===================================================================================================================================
+
+How was work split between teammates?
+Work was split up based on each new feature:
+Cheat Mode - Austin, Mckenna, Bunty
+Easy/Medium/Hard mode - Blake
+Leaderboard & timer - Seth
+Additional work such as bugfixing and documentation were split up based on whose changes caused bugs or needed to be documented. 
+
+What were the challenges and how were they overcome or dealt with?
+
+Yes, the biggest and most time consuming challenge was figuring out how to make edits to the game and compile them. Nobody in the
+group had any experience with actionscript or flash development, so there was a lot of confusion regarding how the files 
+interact with each other, what they do, and how to compile them. There was little documentation on these topics. After a lot 
+of research, we overcame this problem by discovering Adobe Animate and looking up tutorial projects online. After we had a 
+basic understanding of actionscript, the project was fairly straightforward and easy because we could use the code from the 
+existing project as an example.
+
+Did any features not make the demo?
+
+All of the features we proposed made the demo and worked as intended. However, some nice features we considered adding included
+a play again button, displaying a timer next to the board, and a reset button. We ultimately chose not to add them because we
+already had all of our desired features working and didn't want to introduce new bugs.
+
+Is there anything your team could have done differently?
+
+Yes, the early days of the project could have been much more productive, but almost nothing was done because we were so confused
+about how to edit and compile actionscript. If we had found a working IDE earlier, we would have been done with the project much
+earlier and had more time to polish off the finished product. 
