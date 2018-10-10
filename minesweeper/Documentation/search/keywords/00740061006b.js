@@ -1,0 +1,1 @@
+NDSearch.OnPrefixDataLoaded("tak",["Function"],[["takeIn",,[["Main",,,,0,"File:Main.as:Main.takeIn","ActionScriptClass:Main:takeIn"]]]]);

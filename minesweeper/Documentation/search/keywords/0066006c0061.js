@@ -1,0 +1,1 @@
+NDSearch.OnPrefixDataLoaded("fla",["Function","Variable"],[["flagAll",,[["Game",,,,0,"File:Game.as:Game.flagAll","ActionScriptClass:Game:flagAll"]]],["flagCount",,[["Game",,,,1,"File:Game.as:Game.flagCount","ActionScriptClass:Game:flagCount"]]]]);

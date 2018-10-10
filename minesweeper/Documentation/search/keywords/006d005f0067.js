@@ -1,0 +1,1 @@
+NDSearch.OnPrefixDataLoaded("m_g",["Variable"],[["m_gameType",,[["Game",,,,0,"File:Game.as:Game.m_gameType","ActionScriptClass:Game:m_gameType"]]]]);

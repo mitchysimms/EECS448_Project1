@@ -1,0 +1,1 @@
+NDSearch.OnPrefixDataLoaded("fir",["Variable"],[["firstClick",,[["Game",,,,0,"File:Game.as:Game.firstClick","ActionScriptClass:Game:firstClick"]]]]);

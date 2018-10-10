@@ -1,0 +1,1 @@
+NDSearch.OnPrefixDataLoaded("set",["Function"],[["setBoardMines",,[["Board",,,,0,"File:Board.as:Board.setBoardMines","ActionScriptClass:Board:setBoardMines"]]],["setMine",,[["BoardPiece",,,,0,"File:BoardPiece.as:BoardPiece.setMine","ActionScriptClass:BoardPiece:setMine"]]]]);

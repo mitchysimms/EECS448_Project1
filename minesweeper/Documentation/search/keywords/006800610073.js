@@ -1,0 +1,1 @@
+NDSearch.OnPrefixDataLoaded("has",["Variable"],[["hasMine",,[["BoardPiece",,,,0,"File:BoardPiece.as:BoardPiece.hasMine","ActionScriptClass:BoardPiece:hasMine"]]]]);

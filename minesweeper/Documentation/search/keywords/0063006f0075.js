@@ -1,0 +1,1 @@
+NDSearch.OnPrefixDataLoaded("cou",["Function"],[["countFlaggedMines",,[["Game",,,,0,"File:Game.as:Game.countFlaggedMines","ActionScriptClass:Game:countFlaggedMines"]]],["countFlags",,[["Game",,,,0,"File:Game.as:Game.countFlags","ActionScriptClass:Game:countFlags"]]]]);

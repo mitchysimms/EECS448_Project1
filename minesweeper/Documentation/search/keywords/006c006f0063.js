@@ -1,0 +1,1 @@
+NDSearch.OnPrefixDataLoaded("loc",["Variable"],[["localScores",,[["Game",,,,0,"File:Game.as:Game.localScores","ActionScriptClass:Game:localScores"]]]]);

@@ -1,0 +1,1 @@
+NDSearch.OnPrefixDataLoaded("fra",["Variable"],[["frameArray",,[["Game",,,,0,"File:Game.as:Game.frameArray","ActionScriptClass:Game:frameArray"]]]]);

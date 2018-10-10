@@ -1,0 +1,1 @@
+NDSearch.OnPrefixDataLoaded("col",["Variable"],[["col",,[["BoardPiece",,,,0,"File:BoardPiece.as:BoardPiece.col","ActionScriptClass:BoardPiece:col"]]],["colSize",,[["Game",,,,0,"File:Game.as:Game.colSize","ActionScriptClass:Game:colSize"]]],["colsTotal",,[["Board",,,,0,"File:Board.as:Board.colsTotal","ActionScriptClass:Board:colsTotal"]]]]);

@@ -1,0 +1,1 @@
+NDSearch.OnPrefixDataLoaded("min",["Variable"],[["minesTotal",,[["Board",,,,0,"File:Board.as:Board.minesTotal","ActionScriptClass:Board:minesTotal"]]]]);

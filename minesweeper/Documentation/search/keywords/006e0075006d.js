@@ -1,0 +1,1 @@
+NDSearch.OnPrefixDataLoaded("num",["Variable"],[["numCols",,[["Main",,,,0,"File:Main.as:Main.numCols","ActionScriptClass:Main:numCols"]]],["numMines",,[["Main",,,,0,"File:Main.as:Main.numMines","ActionScriptClass:Main:numMines"]]],["numRows",,[["Main",,,,0,"File:Main.as:Main.numRows","ActionScriptClass:Main:numRows"]]]]);

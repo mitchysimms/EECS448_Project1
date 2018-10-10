@@ -1,0 +1,1 @@
+NDSearch.OnPrefixDataLoaded("tog",["Function"],[["toggleFlagged",,[["BoardPiece",,,,0,"File:BoardPiece.as:BoardPiece.toggleFlagged","ActionScriptClass:BoardPiece:toggleFlagged"]]]]);

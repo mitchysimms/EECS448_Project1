@@ -1,0 +1,1 @@
+NDSearch.OnPrefixDataLoaded("che",["Function"],[["cheatMode",,[["Game",,,,0,"File:Game.as:Game.cheatMode","ActionScriptClass:Game:cheatMode"]]],["Checker",,[["Game",,,,0,"File:Game.as:Game.Checker","ActionScriptClass:Game:Checker"]]],["checkForMine",,[["BoardPiece",,,,0,"File:BoardPiece.as:BoardPiece.checkForMine","ActionScriptClass:BoardPiece:checkForMine"]]]]);

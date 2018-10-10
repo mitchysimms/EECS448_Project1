@@ -1,0 +1,1 @@
+NDSearch.OnPrefixDataLoaded("eas",["Function"],[["easyMode",,[["Main",,,,0,"File:Main.as:Main.easyMode","ActionScriptClass:Main:easyMode"]]]]);

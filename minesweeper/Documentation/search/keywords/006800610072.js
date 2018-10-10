@@ -1,0 +1,1 @@
+NDSearch.OnPrefixDataLoaded("har",["Function"],[["hardMode",,[["Main",,,,0,"File:Main.as:Main.hardMode","ActionScriptClass:Main:hardMode"]]]]);

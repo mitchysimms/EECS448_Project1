@@ -1,0 +1,1 @@
+NDSearch.OnPrefixDataLoaded("ise",["Function"],[["isEmpty",,[["BoardPiece",,,,0,"File:BoardPiece.as:BoardPiece.isEmpty","ActionScriptClass:BoardPiece:isEmpty"],["Game",,,,0,"File:Game.as:Game.isEmpty","ActionScriptClass:Game:isEmpty"]]]]);
