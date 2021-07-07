@@ -44,3 +44,5 @@ Mitch: Building array of board pieces, board piece class
 Zach: User input from main, building board
 Natalia: Recursive check when click is made
 Matthew: Building game program
+
+npm install -g asconfigc

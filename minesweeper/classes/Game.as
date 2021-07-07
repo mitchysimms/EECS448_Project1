@@ -1,14 +1,38 @@
 ﻿﻿package classes
 {
+	import flash.display.*;
 	import flash.events.MouseEvent;
+	import flash.events.KeyboardEvent;
 	import flash.events.Event;
-	import classes.Board;
-	import flash.display.MovieClip;
+	import flash.events.MouseEvent;
+	import flash.text.*;
+	import classes.Game;
+	import flash.events.TimerEvent; 
+    import flash.utils.Timer;
+	import flash.net.SharedObject;
+    import flash.net.SharedObjectFlushStatus;
 	/**
 	 * Processes each move and checks whether the game is over
 	 */
     public class Game extends MovieClip
     {
+		public var localScores:SharedObject = SharedObject.getLocal("localScores");
+		/**
+		 * Represents if the player won.
+		 */
+		private var didPlayerWin:Boolean = true;
+		/**
+		 * Type of game
+		 */
+		private var m_gameType:String;
+		/**
+		 * Player's name
+	 	*/
+		private var m_playerName:String;
+		/**
+		 * Timer for game
+		 */
+		private var timer:Timer = new Timer(1000, 0);
 		/**
 		 * Board object for the game
 		 */
@@ -30,12 +54,26 @@
 		 */
 		private var firstClick:Boolean;
 		/**
+		 * Array to hold current frames of every tile. Used to perserve board state before everything is visible in cheat mode.
+		 */
+		private var frameArray:Array = [];
+		/**
+		 * used to see if 'c' has been clicked. There was a bug when activating cheat mode while already in cheat mode.
+		 */
+		private var isClicked:Boolean = true; 
+		/**
+		 * Used to make sure you're in cheat mode when trying to deactivate cheat mode. Trying to deactivate cheat mode when not in cheat mode also had a bug.
+		 */
+		private var inCheatMode:Boolean = false;
+		/**
 		 * Stores or intitializes class variables, adds event listenser to all pieces
 		 * @post all pieces respond to clicking
 		 * @param myBoard Board used for the game
 		 */
-        public function Game( myBoard:Board ) //initialize private variables, set clicks, call isEmpty function for left click, setFlag for right click
+        public function Game( myBoard:Board, gameType:String, playerName:String) //initialize private variables, set clicks, call isEmpty function for left click, setFlag for right click
         {
+			m_gameType = gameType;
+			m_playerName = playerName;
 			board = myBoard;
 			rowSize = myBoard.getRows();
 			colSize = myBoard.getCols();
@@ -44,10 +82,66 @@
 			for (var i:int = 0; i < rowSize; i++) {
 				for (var j:int = 0; j < colSize; j++) {
 					myBoard.getBoardPiece(i, j).addEventListener(MouseEvent.CLICK, handleClick);
+					myBoard.getBoardPiece(i,j).addEventListener(KeyboardEvent.KEY_DOWN, cheatMode);
 					myBoard.getBoardPiece(i, j).buttonMode = true;
 				}
 			}
         }
+
+		/**
+		 * Fills frameArray, deactivates ability to click, and reveals board. 
+		 * @post all board pieces are returned to the frames prior to cheat mode.
+		 * @param KeyboardEvent - used to see what key was pressed.
+		 */
+		public function cheatMode(evt:KeyboardEvent):void {
+
+			
+			if(String.fromCharCode(evt.charCode) == "c" && isClicked)
+			{
+				isClicked = false;
+				inCheatMode = true;
+				//Cheat mode activated so now fill array with current board state.
+				for (var i:int = 0; i < rowSize; i++) {
+					frameArray[i] = [];
+				for (var j:int = 0; j < colSize; j++) {
+					frameArray[i][j] = board.getBoardPiece(i, j).getFrame();
+				}
+				}
+
+				//disables clicking and reveals all tiles.
+				for (var k:int = 0; k < rowSize; k++) {
+				for (var l:int = 0; l < colSize; l++) {
+					board.getBoardPiece(k, l).removeEventListener(MouseEvent.CLICK, handleClick);
+					Checker(k,l);
+				}
+			}
+			revealMines();
+			}
+			//cheat mode deactivated, allow clicking and return board to original state. 
+			if(String.fromCharCode(evt.charCode) == "v" && inCheatMode)
+			{
+				isClicked = true;
+				inCheatMode = false;
+				for (var a:int = 0; a < rowSize; a++) {
+				for (var b:int = 0; b < colSize; b++) {
+					board.getBoardPiece(a, b).addEventListener(MouseEvent.CLICK, handleClick);
+				}}
+			revertCheat();	
+			}
+		}
+		
+		/**
+		 * sets each piece to the frame obtained from the frameArray.
+		 * @pre board has been cheated on.
+		 *@post board is reverted back to previous state.
+		 */
+		public function revertCheat():void {
+			for (var i:int = 0; i < rowSize; i++) {
+				for (var j:int = 0; j < colSize; j++) {
+					(board.getBoardPiece(i, j)).gotoAndStop(frameArray[i][j]);
+			}
+		}
+	}
 		/**
 		 * If unclear piece is clicked, piece is cleared or mine is set off. If unclicked piece is shift-clicked, flag is toggled and
 		 * flagCounter is updated. If numbered piece is clicked and that number of flags surround it, clicks all unclicked pieces around that piece.
@@ -68,6 +162,11 @@
 						evt.currentTarget.gotoAndStop(11);
 					}
 				}
+				if(endCheck())
+				{
+					flagAll();
+					endGame();
+				}
 			}
 			else if (evt.currentTarget.currentFrame >= 1 && evt.currentTarget.currentFrame <= 8) {
 				if (countFlags(evt.currentTarget.currentFrame,evt.currentTarget.getRow(), evt.currentTarget.getCol()) == evt.currentTarget.currentFrame) {
@@ -81,6 +180,7 @@
 			else if (evt.currentTarget.currentFrame == 10) {
 				if (firstClick) {
 					firstClick = false;
+					timer.start(); //Starts timer
 					board.setBoardMines(evt.currentTarget.getRow(), evt.currentTarget.getCol());
 				}
 				isEmpty(evt.currentTarget.getRow(), evt.currentTarget.getCol());
@@ -88,7 +188,7 @@
 					flagAll();
 					endGame();
 				}
-			}
+			} 
 		}
 		/**
 		 * Flags all non-flagged mines
@@ -113,8 +213,46 @@
 			for (var i:int = 0; i < rowSize; i++) {
 				for (var j:int = 0; j < colSize; j++) {
 					board.getBoardPiece(i, j).removeEventListener(MouseEvent.CLICK, handleClick);
+					board.getBoardPiece(i, j).removeEventListener(KeyboardEvent.KEY_DOWN, cheatMode);
 				}
-			}			
+			}
+			if(didPlayerWin) recordGame();
+		}
+		/**
+		 * Records game data in cookie
+		 * @pre Game has ended by winning.
+		 * @post Game data has been written to cookie if a highscore has occured.
+		 */
+		public function recordGame():void{
+			timer.stop();
+			var newScore:Object = {
+				name: m_playerName,
+				score: timer.currentCount
+			};
+
+			if (localScores.data.easyMode == null) localScores.data.easyMode = new Array();
+			if (localScores.data.mediumMode == null) localScores.data.mediumMode = new Array();
+			if (localScores.data.hardMode == null) localScores.data.hardMode = new Array();
+
+			if (m_gameType == "easy")
+			{
+				localScores.data.easyMode.push(newScore);
+				localScores.data.easyMode.sortOn("score", Array.NUMERIC);
+				if (localScores.data.easyMode.length > 5) localScores.data.easyMode.pop();
+			}
+			else if (m_gameType == "medium")
+			{
+				localScores.data.mediumMode.push(newScore);
+				localScores.data.mediumMode.sortOn("score", Array.NUMERIC);
+				if (localScores.data.mediumMode.length > 5) localScores.data.mediumMode.pop();
+			}
+			else if (m_gameType == "hard")
+			{
+				localScores.data.hardMode.push(newScore);
+				localScores.data.hardMode.sortOn("score", Array.NUMERIC);
+				if (localScores.data.hardMode.length > 5) localScores.data.hardMode.pop();
+			}
+			localScores.flush();
 		}
 		/**
 		 * Clears unclicked pieces around a given piece
@@ -124,63 +262,36 @@
 		 * @param col column of piece
 		 */
 		public function clearSurrounding(row:int, col:int):void {
-			if (row-1>=0)
+			if((row - 1 >= 0) && board.getBoardPiece(row-1,  col).currentFrame == 10)//checks top
 			{
-				if(board.getBoardPiece(row-1,  col).currentFrame == 10)//checks left-down
+				isEmpty(row-1,  col);
+				if((col + 1 < colSize) && board.getBoardPiece(row-1,  col+1).currentFrame == 10)//checks top-right
 				{
-					isEmpty(row-1,  col);
-				}
-
-				if(col+1<colSize)
-				{
-					if(board.getBoardPiece(row-1,  col+1).currentFrame == 10)//checks left-down
-					{
 					isEmpty(row-1,  col+1);
-					}
 				}
-				if(col-1>=0)
+				if((col - 1 >= 0) && board.getBoardPiece(row-1,  col-1).currentFrame == 10)//checks top-left
 				{
-					if(board.getBoardPiece(row-1,  col-1).currentFrame == 10)//checks left-down
-					{
-					isEmpty(row-1,  col-1);
-					}
-
+					isEmpty(row-1,  col-1); 
 				}
 			}
-
-			if(col+1<colSize)
+			if((col + 1 < colSize) && board.getBoardPiece(row,  col+1).currentFrame == 10)//checks right
 			{
-				if(board.getBoardPiece(row,  col+1).currentFrame == 10)//checks left-down
-				{
-					isEmpty(row,  col+1);
-				}
+				isEmpty(row,  col+1);
 			}
-			if(col-1>=0)
+			if((col - 1 >= 0) && board.getBoardPiece(row,  col-1).currentFrame == 10)//checks left
 			{
-				if(board.getBoardPiece(row,  col-1).currentFrame == 10)//checks left-down
-				{
-					isEmpty(row,  col-1);
-				}
+				isEmpty(row,  col-1);
 			}
-			if (row+1<rowSize)
+			if((row + 1 < rowSize) && board.getBoardPiece(row+1,  col).currentFrame == 10)//checks down
 			{
-				if(board.getBoardPiece(row+1,  col).currentFrame == 10)//checks left-down
+				isEmpty(row+1,  col);
+				if((col + 1 < colSize) && board.getBoardPiece(row+1,  col+1).currentFrame == 10)//checks down-right
 				{
-					isEmpty(row+1,  col);
+					isEmpty(row+1,  col+1);
 				}
-				if(col+1<colSize)
+				if((col - 1 >= 0) && board.getBoardPiece(row+1,  col-1).currentFrame == 10)//checks down-left
 				{
-					if(board.getBoardPiece(row+1,  col+1).currentFrame == 10)//checks left-down
-					{
-						isEmpty(row+1,  col+1);
-					}
-				}
-				if(col-1>=0)
-				{
-					if(board.getBoardPiece(row+1,  col-1).currentFrame == 10)//checks left-down
-					{
-					isEmpty(row+1,  col-1);
-					}
+					isEmpty(row+1,  col-1); 
 				}
 			}
 		}
@@ -193,66 +304,59 @@
 		 */
 		public function countFlags(x:int,row:int,col:int):int {
 			var count:int = 0;
-			if (row-1>=0)
+			if((row - 1 >= 0) && board.getBoardPiece(row-1, col).currentFrame == 11)//checks top
 			{
-				if((board.getBoardPiece(row-1, col)).currentFrame == 11)//checks left-down
+				count++;
+				if((col + 1 < colSize) && board.getBoardPiece(row-1, col+1).currentFrame == 11)//checks top right
 				{
 					count++;
 				}
-
-				if(col+1<colSize)
-				{
-					if((board.getBoardPiece(row-1, col+1)).currentFrame == 11)//checks left-down
-					{
-					count++;
-					}
-				}
-				if(col-1>=0)
-				{
-					if((board.getBoardPiece(row-1, col-1)).currentFrame == 11)//checks left-down
-					{
-					count++;
-					}
-
-				}
-			}
-
-			if(col+1<colSize)
-			{
-				if((board.getBoardPiece(row, col+1)).currentFrame == 11)//checks left-down
+				if((col - 1 >= 0) && board.getBoardPiece(row-1, col-1).currentFrame == 11)//checks top left
 				{
 					count++;
 				}
 			}
-			if(col-1>=0)
+			if((col + 1 < colSize) && board.getBoardPiece(row, col+1).currentFrame == 11)//checks right
 			{
-				if((board.getBoardPiece(row, col-1)).currentFrame == 11)//checks left-down
-				{
-					count++;
-				}
+				count++;
 			}
-			if (row+1<rowSize)
+			if((col - 1 >= 0) && board.getBoardPiece(row, col-1).currentFrame == 11)//checks left
 			{
-				if((board.getBoardPiece(row+1, col)).currentFrame == 11)//checks left-down
+				count++;
+			}
+			if((row + 1 < rowSize) && board.getBoardPiece(row+1, col).currentFrame == 11)//checks bottom
+			{
+				count++;
+				if((col + 1 < colSize) && board.getBoardPiece(row+1, col+1).currentFrame == 11)//checks bottom right
 				{
 					count++;
 				}
-				if(col+1<colSize)
+				if((col - 1 >= 0) && board.getBoardPiece(row+1, col-1).currentFrame == 11)//checks bottom left
 				{
-					if((board.getBoardPiece(row+1, col+1)).currentFrame == 11)//checks left-down
-					{
-						count++;
-					}
-				}
-				if(col-1>=0)
-				{
-					if((board.getBoardPiece(row+1, col-1)).currentFrame == 11)//checks left-down
-					{
 					count++;
-					}
 				}
 			}
 			return count;
+		}
+		/**
+		* Counts the number of flagged mines on the board
+		* @pre Game is in progress
+		* @return Number of flagged mines
+		*/
+		public function countFlaggedMines():int
+		{
+			var flaggedMines:int = 0;
+			for(var i:int = 0; i < rowSize; i++)
+			{
+				for(var j:int = 0; j < colSize; j++)
+				{
+					if(board.getBoardPiece(i, j).checkForMine() && board.getBoardPiece(i, j).currentFrame == 11)
+					{
+						flaggedMines++;
+					}
+				}
+			}
+			return flaggedMines;
 		}
 		/**
 		 * Checks whether there are no more non-mine pieces that can be clicked
@@ -260,18 +364,14 @@
 		 * @return whether board has been cleared
 		 */
 		public function endCheck():Boolean{
-			var count:int = 0;
-			for (var i:int = 0; i < rowSize; i++) {
-				for (var j:int = 0; j < colSize; j++) {
-					if (!board.getBoardPiece(i, j).checkForMine() && board.getBoardPiece(i, j).currentFrame != 10) {
-						count++;
-					}
-				}
-			}
-			if (count == rowSize*colSize - board.getMines()) {
+			if(countFlaggedMines() == board.getMines())
+			{
 				return true;
 			}
-			return false;
+			else
+			{
+				return false;
+			}
 		}
 
 		/**
@@ -283,13 +383,14 @@
 		public function isEmpty( row:int, col:int ):void //returns false if there's a bomb, true if it's an empty space
 		{
 			if((board.getBoardPiece(row, col)).checkForMine()==false)
-			{
+			{ 
 				Checker(row, col);
 			}
 			else
 			{
 				revealMines();
 				board.getBoardPiece(row,col).gotoAndStop(13);
+				didPlayerWin = false;
 				endGame();
 			}
 		}
@@ -446,8 +547,8 @@
 				if(counter!=0)
 				{
 					(board.getBoardPiece(row, col)).gotoAndStop(counter); //switch frame to counter
+					
 				}
-
 			}
 		}
     }
